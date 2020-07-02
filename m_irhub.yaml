@@ -1,0 +1,68 @@
+substitutions:
+  device_name: m_irhub
+  friendly_name: M IRHub
+  comment: "Mobility - IR Hub FK-UFO-R1"
+  
+esphome:
+  name: ${device_name}
+  platform: ESP8266
+  board: esp01_1m
+  comment: ${comment}
+  on_boot:
+    priority: 100 # Highest priority, ensures light turns on without delay.
+    then:
+      - light.turn_on: ${device_name}_light
+
+wifi:
+  ssid: !secret base_wifi_ssid
+  password: !secret base_wifi_password
+  power_save_mode: none
+  manual_ip:
+    static_ip: !secret m_irhub_wifi_manual_ip_static_ip
+    gateway: !secret base_wifi_manual_ip_gateway
+    subnet: !secret base_wifi_manual_ip_subnet
+
+<<: !include common/api.yaml
+<<: !include common/ota.yaml
+<<: !include common/logger.yaml
+<<: !include common/web_server.yaml
+
+remote_transmitter:
+  pin: GPIO14
+  carrier_duty_percent: 33%
+
+remote_receiver:
+  pin:
+    number: GPIO5
+    inverted: True
+  dump: raw
+  on_raw:
+    - remote_transmitter.transmit_raw:
+        code: !lambda return x;
+  
+binary_sensor:
+  - !include common/binary_sensor/status.yaml
+
+switch:
+  - platform: gpio
+    id: ${device_name}_switch
+    
+    restore_mode: RESTORE_DEFAULT_OFF
+    pin: GPIO13
+    on_turn_on:
+      - switch.turn_on: ${device_name}_restart
+  - platform: restart
+    id: ${device_name}_restart
+    name: ${friendly_name} Restart
+
+output:
+  - platform: esp8266_pwm
+    id: ${device_name}_led
+    pin:
+      number: GPIO4
+      inverted: True
+
+light:
+  - platform: monochromatic
+    output: ${device_name}_led
+    id: ${device_name}_light
