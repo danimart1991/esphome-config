@@ -1,0 +1,47 @@
+substitutions:
+  device_name: f0_u_waterheater
+  friendly_name: F0 U WaterHeater
+  comment: "Floor 0 - Utility - Water Heater (Sonoff Basic R2 Dry Contact Mod)"
+
+esphome:
+  name: ${device_name}
+  platform: ESP8266
+  board: esp01_1m
+  comment: ${comment}
+
+wifi:
+  ssid: !secret base_wifi_ssid
+  password: !secret base_wifi_password
+  power_save_mode: none
+  manual_ip:
+    static_ip: !secret f0_u_waterheater_wifi_manual_ip_static_ip
+    gateway: !secret base_wifi_manual_ip_gateway
+    subnet: !secret base_wifi_manual_ip_subnet
+
+<<: !include common/api.yaml
+<<: !include common/ota.yaml
+<<: !include common/logger.yaml
+<<: !include common/web_server.yaml
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    id: ${device_name}_button
+    internal: True
+    on_press:
+      - switch.toggle: ${device_name}_heating
+  - !include common/binary_sensor/status.yaml
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes
+      
+switch:
+  - platform: gpio
+    pin: GPIO12
+    id: ${device_name}_heating
+    name: ${friendly_name} Heating
