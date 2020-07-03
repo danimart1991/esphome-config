@@ -1,0 +1,59 @@
+substitutions:
+  device_name: f0_lr_hub
+  friendly_name: F0 LR Hub
+  miflora_device_name: f0_lr_miflora
+  miflora_friendly_name: "F0 LR MiFlora"
+  comment: "Floor 0 - Living Room - Hub (NodeMCU ESP32S)"
+  default_update_interval: 60s
+
+esphome:
+  name: ${device_name}
+  platform: ESP32
+  board: nodemcu-32s
+  comment: ${comment}
+
+wifi:
+  ssid: !secret base_wifi_ssid
+  password: !secret base_wifi_password
+  power_save_mode: none
+  manual_ip:
+    static_ip: !secret f0_lr_hub_wifi_manual_ip_static_ip
+    gateway: !secret base_wifi_manual_ip_gateway
+    subnet: !secret base_wifi_manual_ip_subnet
+
+<<: !include common/api.yaml
+<<: !include common/ota.yaml
+<<: !include common/logger.yaml
+<<: !include common/web_server.yaml
+
+i2c:
+  - sda: GPIO21
+    scl: GPIO22
+
+esp32_ble_tracker:
+
+sensor:
+  - !include common/sensor/bme280.yaml
+  - platform: xiaomi_hhccjcy01
+    mac_address: !secret f0_lr_miflora_mac
+    temperature:
+      name: ${miflora_friendly_name} Temperature
+      id: ${miflora_device_name}_temperature
+    moisture:
+      name: ${miflora_friendly_name} Moisture
+      id: ${miflora_device_name}_moisture
+    illuminance:
+      name: ${miflora_friendly_name} Brightness
+      id: ${miflora_device_name}_brightness
+    conductivity:
+      name: ${miflora_friendly_name} Soil Conductivity
+      id: ${miflora_device_name}_conductivity
+    battery_level:
+      name: ${miflora_friendly_name} Battery Level
+      id: ${miflora_device_name}_battery
+
+binary_sensor:
+  - !include common/binary_sensor/status.yaml
+
+status_led:
+  pin: GPIO2
