@@ -10,19 +10,11 @@ esphome:
   board: nodemcu-32s
   comment: ${comment}
 
-wifi:
-  ssid: !secret base_wifi_ssid
-  password: !secret base_wifi_password
-  power_save_mode: none
-  manual_ip:
-    static_ip: !secret f0_g_hub_wifi_manual_ip_static_ip
-    gateway: !secret base_wifi_manual_ip_gateway
-    subnet: !secret base_wifi_manual_ip_subnet
-
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
+<<: !include common/wifi.yaml
 
 i2c:
   - sda: GPIO21

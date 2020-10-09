@@ -1,7 +1,7 @@
 substitutions:
   device_name: f1_kb_hub
   friendly_name: F1 KB Hub
-  comment: "Floor 1 - Kid's Bedroom - Hub (NodeMCU ESP8266)"
+  comment: "Floor 1 - Kids Bedroom - Hub (NodeMCU ESP8266)"
   default_update_interval: 60s
 
 esphome:
@@ -10,19 +10,11 @@ esphome:
   board: nodemcuv2
   comment: ${comment}
 
-wifi:
-  ssid: !secret base_wifi_ssid
-  password: !secret base_wifi_password
-  power_save_mode: none
-  manual_ip:
-    static_ip: !secret f1_kb_hub_wifi_manual_ip_static_ip
-    gateway: !secret base_wifi_manual_ip_gateway
-    subnet: !secret base_wifi_manual_ip_subnet
-
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
+<<: !include common/wifi.yaml
 
 i2c:
   - sda: D2

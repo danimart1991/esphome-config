@@ -1,0 +1,6 @@
+---
+wifi:
+  ssid: !secret base_wifi_ssid
+  password: !secret base_wifi_password
+  power_save_mode: none
+  fast_connect: true
