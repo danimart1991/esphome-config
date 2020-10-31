@@ -1,9 +1,9 @@
 substitutions:
-  device_name: f0_g_hub
-  friendly_name: F0 G Hub
+  device_name: garage_hub
+  friendly_name: Garage Hub
   comment: "Floor 0 - Garage - Hub (NodeMCU ESP32S)"
   default_update_interval: 60s
-  
+
 esphome:
   name: ${device_name}
   platform: ESP32
@@ -14,10 +14,11 @@ wifi:
   ssid: !secret base_wifi_ssid
   password: !secret base_wifi_password
   power_save_mode: none
+  fast_connect: true
   manual_ip:
-    static_ip: !secret f0_g_hub_wifi_manual_ip_static_ip
-    gateway: !secret base_wifi_manual_ip_gateway
+    static_ip: !secret garage_hub_wifi_manual_ip_static_ip
     subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
 
 <<: !include common/api.yaml
 <<: !include common/ota.yaml

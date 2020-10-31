@@ -1,7 +1,7 @@
 substitutions:
-  device_name: m_plug
-  friendly_name: "M Plug"
-  comment: "Mobility - Plug (Plug AWOW EU3S)"
+  device_name: utility_washingmachine
+  friendly_name: "Utility WashingMachine"
+  comment: "Floor 0 - Utility - Washing Machine (Plug AWOW EU3S)"
   current_res: "0.00221"
   voltage_div: "955"
 
@@ -15,10 +15,11 @@ wifi:
   ssid: !secret base_wifi_ssid
   password: !secret base_wifi_password
   power_save_mode: none
+  fast_connect: true
   manual_ip:
-    static_ip: !secret m_plug_wifi_manual_ip_static_ip
-    gateway: !secret base_wifi_manual_ip_gateway
+    static_ip: !secret utility_washingmachine_wifi_manual_ip_static_ip
     subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
 
 time:
   - platform: homeassistant

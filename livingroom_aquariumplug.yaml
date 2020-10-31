@@ -1,7 +1,7 @@
 substitutions:
-  device_name: f0_u_washingmachine
-  friendly_name: "F0 U WashingMachine"
-  comment: "Floor 0 - Utility - Washing Machine (Plug AWOW EU3S)"
+  device_name: livingroom_aquariumplug
+  friendly_name: "LivingRoom AquariumPlug"
+  comment: "Floor 0 - Living Room - Aquarium Plug (Plug AWOW EU3S)"
   current_res: "0.00221"
   voltage_div: "955"
 
@@ -15,20 +15,17 @@ wifi:
   ssid: !secret base_wifi_ssid
   password: !secret base_wifi_password
   power_save_mode: none
+  fast_connect: true
   manual_ip:
-    static_ip: !secret f0_u_washingmachine_wifi_manual_ip_static_ip
-    gateway: !secret base_wifi_manual_ip_gateway
+    static_ip: !secret livingroom_aquariumplug_wifi_manual_ip_static_ip
     subnet: !secret base_wifi_manual_ip_subnet
-
-time:
-  - platform: homeassistant
-    id: homeassistant_time
+    gateway: !secret base_wifi_manual_ip_gateway
 
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
-    
+
 binary_sensor:
   - platform: gpio
     id: ${device_name}_button
@@ -56,9 +53,14 @@ switch:
     id: ${device_name}_led
     internal: True
     restore_mode: RESTORE_DEFAULT_OFF
-    pin: 
+    pin:
       number: GPIO02
       inverted: True
+  - platform: template
+    name: ${friendly_name} AutoSwitch
+    id: ${device_name}_autoswitch
+    optimistic: True
+    restore_state: True
 
 sensor:
   - platform: hlw8012
@@ -96,3 +98,35 @@ sensor:
       # Multiplication factor from W to kW is 0.001
       - multiply: 0.001
     unit_of_measurement: kWh
+
+time:
+  - platform: sntp
+    on_time:
+      - seconds: 0
+        minutes: 30
+        hours: 7
+        then:
+          if:
+            condition:
+              switch.is_on: ${device_name}_autoswitch
+            then:
+              switch.turn_on: ${device_name}_switch
+      - seconds: 0
+        minutes: 0
+        hours: 12
+        then:
+          if:
+            condition:
+              switch.is_on: ${device_name}_autoswitch
+            then:
+              switch.turn_off: ${device_name}_switch
+
+text_sensor:
+  - platform: template
+    name: ${friendly_name} NextTurnOff
+    icon: mdi:clock-end
+    lambda: return {"12:00:00"};
+  - platform: template
+    name: ${friendly_name} NextTurnOn
+    icon: mdi:clock-start
+    lambda: return {"07:30:00"};

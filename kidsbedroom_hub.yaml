@@ -1,7 +1,7 @@
 substitutions:
-  device_name: f1_mb_hub
-  friendly_name: F1 MB Hub
-  comment: "Floor 1 - Master Bedroom - Hub (NodeMCU ESP8266)"
+  device_name: kidsbedroom_hub
+  friendly_name: KidsBedroom Hub
+  comment: "Floor 1 - Kids Bedroom - Hub (NodeMCU ESP8266)"
   default_update_interval: 60s
 
 esphome:
@@ -14,10 +14,11 @@ wifi:
   ssid: !secret base_wifi_ssid
   password: !secret base_wifi_password
   power_save_mode: none
+  fast_connect: true
   manual_ip:
-    static_ip: !secret f1_mb_hub_wifi_manual_ip_static_ip
-    gateway: !secret base_wifi_manual_ip_gateway
+    static_ip: !secret kidsbedroom_hub_wifi_manual_ip_static_ip
     subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
 
 <<: !include common/api.yaml
 <<: !include common/ota.yaml

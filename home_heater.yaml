@@ -1,7 +1,7 @@
 substitutions:
-  device_name: f0_u_waterheater
-  friendly_name: F0 U WaterHeater
-  comment: "Floor 0 - Utility - Water Heater (Sonoff Basic R2 Dry Contact Mod)"
+  device_name: home_heater
+  friendly_name: Home Heater
+  comment: "Home - Heater (Sonoff Basic R2 Dry Contact Mod)"
 
 esphome:
   name: ${device_name}
@@ -13,10 +13,11 @@ wifi:
   ssid: !secret base_wifi_ssid
   password: !secret base_wifi_password
   power_save_mode: none
+  fast_connect: true
   manual_ip:
-    static_ip: !secret f0_u_waterheater_wifi_manual_ip_static_ip
-    gateway: !secret base_wifi_manual_ip_gateway
+    static_ip: !secret home_heater_wifi_manual_ip_static_ip
     subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
 
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
@@ -32,16 +33,16 @@ binary_sensor:
     id: ${device_name}_button
     internal: True
     on_press:
-      - switch.toggle: ${device_name}_heating
+      - switch.toggle: ${device_name}_switch
   - !include common/binary_sensor/status.yaml
 
 status_led:
   pin:
     number: GPIO13
     inverted: yes
-      
+
 switch:
   - platform: gpio
     pin: GPIO12
-    id: ${device_name}_heating
-    name: ${friendly_name} Heating
+    id: ${device_name}_switch
+    name: ${friendly_name} Switch

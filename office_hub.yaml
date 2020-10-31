@@ -1,0 +1,39 @@
+substitutions:
+  device_name: office_hub
+  friendly_name: Office Hub
+  comment: "Floor 2 - Office - Hub (NodeMCU ESP32S)"
+  default_update_interval: 60s
+
+esphome:
+  name: ${device_name}
+  platform: ESP32
+  board: esp32dev
+  comment: ${comment}
+
+wifi:
+  ssid: !secret base_wifi_ssid
+  password: !secret base_wifi_password
+  power_save_mode: none
+  fast_connect: true
+  manual_ip:
+    static_ip: !secret office_hub_wifi_manual_ip_static_ip
+    subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
+
+<<: !include common/api.yaml
+<<: !include common/ota.yaml
+<<: !include common/logger.yaml
+<<: !include common/web_server.yaml
+
+i2c:
+  - sda: GPIO21
+    scl: GPIO22
+
+sensor:
+  - !include common/sensor/bme280.yaml
+
+binary_sensor:
+  - !include common/binary_sensor/status.yaml
+
+status_led:
+  pin: GPIO2

@@ -35,7 +35,7 @@ binary_sensor:
   - !include common/binary_sensor/status.yaml
 
 status_led:
-  pin: 
+  pin:
     number: GPIO33
     inverted: true
 

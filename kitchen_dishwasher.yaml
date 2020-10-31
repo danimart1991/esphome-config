@@ -1,6 +1,6 @@
 substitutions:
-  device_name: f0_k_dishwasher
-  friendly_name: "F0 K Dishwasher"
+  device_name: kitchen_dishwasher
+  friendly_name: Kitchen Dishwasher
   comment: "Floor 0 - Kitchen - Dishwasher (Plug Blitzwolf SHP2 V2.3)"
   current_res: "0.00221"
   voltage_div: "955"
@@ -15,10 +15,11 @@ wifi:
   ssid: !secret base_wifi_ssid
   password: !secret base_wifi_password
   power_save_mode: none
+  fast_connect: true
   manual_ip:
-    static_ip: !secret f0_k_dishwasher_wifi_manual_ip_static_ip
-    gateway: !secret base_wifi_manual_ip_gateway
+    static_ip: !secret kitchen_dishwasher_wifi_manual_ip_static_ip
     subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
 
 time:
   - platform: homeassistant
@@ -28,7 +29,7 @@ time:
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
-    
+
 binary_sensor:
   - platform: gpio
     id: ${device_name}_button
@@ -56,7 +57,7 @@ switch:
     id: ${device_name}_blue_led
     internal: True
     restore_mode: RESTORE_DEFAULT_OFF
-    pin: 
+    pin:
       number: GPIO01
       inverted: True
 
