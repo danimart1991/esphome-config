@@ -5,7 +5,16 @@
 # You can whitelist files/folders with !, these will not be ignored.
 !common
 !common/*
+!libs
+!.libs/*
+!docs
+!.docs/*
+!docs/images
+!.docs/images/*
+!*.fzz
+!*.fzpz
 !*.yaml
+!*.png
 !.gitignore
 !.github
 !.github/*

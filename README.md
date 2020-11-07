@@ -6,4 +6,17 @@
 
 # ESPHome Configuration
 
-Here's my [ESPHome](https://esphome.io/) configuration running on DIY and already-made ESP8266 and ESP32 devices. The dashboard is running on Docker over a PC.
+Here's my [ESPHome](https://esphome.io/) configuration running on DIY and already-made ESP8266 and ESP32 devices. The dashboard is running on Docker in my own home server.
+
+## Boards
+
+### 
+
+## Related things
+
+The boards have been designed using [Fritzing](https://fritzing.org/). The documentation for each plate includes the related file for its use and modification.
+
+The following components must be imported in order to view and edit the `.fzz` files correctly.
+
+- **BME280** Temperature, pressure and humidity sensor: [BME280_improved.fzpz](/libs/BME280_improved.fzpz).
+- **NodeMCU ESP32-DevkitC** board: [ESP32-DevkitC.fzpz](/libs/ESP32-DevkitC.fzpz).
