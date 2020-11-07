@@ -11,7 +11,11 @@
 !components/*
 !sensors
 !sensors/*
+!docs
+!docs/*
 !*.yaml
+!*.png
+!*.json
 !.gitignore
 !.github
 !.github/*
