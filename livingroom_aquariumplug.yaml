@@ -100,7 +100,8 @@ sensor:
     unit_of_measurement: kWh
 
 time:
-  - platform: sntp
+  - platform: homeassistant
+    id: homeassistant_time
     on_time:
       - seconds: 0
         minutes: 30
