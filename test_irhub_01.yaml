@@ -1,7 +1,7 @@
 substitutions:
-  device_name: m_irhub
-  friendly_name: M IRHub
-  comment: "Mobility - IR Hub FK-UFO-R1"
+  device_name: test_irhub_01
+  friendly_name: Test IRHub 01
+  comment: "Test - IR Hub - 01 (FK-UFO-R1)"
 
 esphome:
   name: ${device_name}
@@ -13,11 +13,20 @@ esphome:
     then:
       - light.turn_on: ${device_name}_light
 
+wifi:
+  ssid: !secret base_wifi_ssid
+  password: !secret base_wifi_password
+  power_save_mode: none
+  fast_connect: true
+  manual_ip:
+    static_ip: !secret test_irhub_01_wifi_manual_ip_static_ip
+    subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
+
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
-<<: !include common/wifi.yaml
 
 remote_transmitter:
   pin: GPIO14
