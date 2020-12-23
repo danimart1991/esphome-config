@@ -1,13 +1,13 @@
 substitutions:
   device_name: masterbedroom_hub
-  friendly_name: MasterBedroom Hub
-  comment: "Floor 1 - Master Bedroom - Hub (NodeMCU ESP8266)"
+  friendly_name: "MasterBedroom Hub"
+  comment: "Floor 1 - MasterBedroom - Hub (NodeMCU ESP32S)"
   default_update_interval: 60s
 
 esphome:
   name: ${device_name}
-  platform: ESP8266
-  board: nodemcuv2
+  platform: ESP32
+  board: esp32dev
   comment: ${comment}
 
 wifi:
@@ -26,8 +26,8 @@ wifi:
 <<: !include common/web_server.yaml
 
 i2c:
-  - sda: D2
-    scl: D1
+  - sda: GPIO21
+    scl: GPIO22
 
 sensor:
   - !include common/sensor/bme280.yaml
@@ -36,6 +36,4 @@ binary_sensor:
   - !include common/binary_sensor/status.yaml
 
 status_led:
-  pin:
-    number: D0
-    inverted: True
+  pin: GPIO2
