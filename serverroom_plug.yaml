@@ -1,9 +1,9 @@
 substitutions:
-  device_name: masterbedroom_nightplug
-  friendly_name: "MasterBedroom NightPlug"
-  comment: "Floor 1 - Master Bedroom - Night Plug (Plug AWOW EU3S)"
   current_res: "0.00221"
   voltage_div: "955"
+  device_name: serverroom_plug
+  friendly_name: "ServerRoom Plug"
+  comment: "Server Room - Plug (Plug AWOW EU3S)"
 
 esphome:
   name: ${device_name}
@@ -17,7 +17,7 @@ wifi:
   power_save_mode: none
   fast_connect: true
   manual_ip:
-    static_ip: !secret masterbedroom_nightplug_wifi_manual_ip_static_ip
+    static_ip: !secret serverroom_plug_wifi_manual_ip_static_ip
     subnet: !secret base_wifi_manual_ip_subnet
     gateway: !secret base_wifi_manual_ip_gateway
 
@@ -42,24 +42,6 @@ binary_sensor:
       - switch.toggle: ${device_name}_switch
   - !include common/binary_sensor/status.yaml
 
-sun:
-  latitude: !secret sun_latitude
-  longitude: !secret sun_longitude
-  on_sunrise:
-    then:
-      if:
-        condition:
-          switch.is_on: ${device_name}_autoswitch
-        then:
-          switch.turn_off: ${device_name}_switch
-  on_sunset:
-    then:
-      if:
-        condition:
-          switch.is_on: ${device_name}_autoswitch
-        then:
-          switch.turn_on: ${device_name}_switch
-
 switch:
   - platform: gpio
     id: ${device_name}_switch
@@ -77,11 +59,6 @@ switch:
     pin:
       number: GPIO02
       inverted: True
-  - platform: template
-    name: ${friendly_name} AutoSwitch
-    id: ${device_name}_autoswitch
-    optimistic: True
-    restore_state: True
 
 sensor:
   - platform: hlw8012
@@ -120,10 +97,3 @@ sensor:
       - multiply: 0.001
     unit_of_measurement: kWh
 
-text_sensor:
-  - platform: sun
-    name: ${friendly_name} NextTurnOff
-    type: sunrise
-  - platform: sun
-    name: ${friendly_name} NextTurnOn
-    type: sunset
