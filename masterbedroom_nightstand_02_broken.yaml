@@ -48,7 +48,7 @@ sun:
           switch.is_on: ${device_name}_autoswitch
         then:
           light.turn_on: ${device_name}_light
-  
+
 light:
   - platform: fastled_clockless
     chipset: WS2812B
