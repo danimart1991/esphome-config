@@ -1,7 +1,7 @@
 substitutions:
   device_name: kidsbedroom_hub
   friendly_name: KidsBedroom Hub
-  comment: "Floor 1 - Kids Bedroom - Hub (NodeMCU ESP8266)"
+  comment: "Kids Bedroom - Hub (NodeMCU ESP8266)"
   default_update_interval: 60s
 
 esphome:

@@ -1,7 +1,7 @@
 substitutions:
   device_name: office_hub
   friendly_name: Office Hub
-  comment: "Floor 2 - Office - Hub (NodeMCU ESP32S)"
+  comment: "Office - Hub (NodeMCU ESP32S)"
   default_update_interval: 60s
 
 esphome:

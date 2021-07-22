@@ -1,7 +1,7 @@
 substitutions:
   device_name: kitchen_hub
   friendly_name: "Kitchen Hub"
-  comment: "Floor 0 - Kitchen - Hub (NodeMCU ESP32S)"
+  comment: "Kitchen - Hub (NodeMCU ESP32S)"
   default_update_interval: 60s
 
 esphome:

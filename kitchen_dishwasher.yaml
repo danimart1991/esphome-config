@@ -1,9 +1,7 @@
 substitutions:
   device_name: kitchen_dishwasher
   friendly_name: Kitchen Dishwasher
-  comment: "Floor 0 - Kitchen - Dishwasher (Plug Blitzwolf SHP2 V2.3)"
-  current_res: "0.00221"
-  voltage_div: "955"
+  comment: "Kitchen - Dishwasher (Plug Blitzwolf SHP2 V2.3)"
 
 esphome:
   name: ${device_name}
@@ -73,31 +71,35 @@ sensor:
       inverted: True
     cf_pin: GPIO04
     cf1_pin: GPIO05
-    current_resistor: ${current_res}
-    voltage_divider: ${voltage_div}
     current:
-      id: ${device_name}_amperage
-      name: ${friendly_name} Amperage
+      id: ${device_name}_current
+      name: ${friendly_name} Current
       icon: mdi:current-ac
       unit_of_measurement: A
+      filters:
+        - multiply: 0.829134
     voltage:
       id: ${device_name}_voltage
       name: ${friendly_name} Voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
+      filters:
+        - multiply: 0.402105
     power:
-      id: ${device_name}_wattage
-      name: ${friendly_name} Wattage
+      id: ${device_name}_power
+      name: ${friendly_name} Power
       icon: mdi:flash-outline
       unit_of_measurement: W
-    change_mode_every: 8
+      filters:
+        - multiply: 0.177739
+    change_mode_every: 1
     update_interval: 10s
 
   - platform: total_daily_energy
     id: ${device_name}_total_daily_energy
     name: ${friendly_name} Total Daily Energy
     icon: mdi:circle-slice-3
-    power_id: ${device_name}_wattage
+    power_id: ${device_name}_power
     filters:
       # Multiplication factor from W to kW is 0.001
       - multiply: 0.001

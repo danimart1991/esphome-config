@@ -1,7 +1,7 @@
 substitutions:
   device_name: livingroom_hub
   friendly_name: LivingRoom Hub
-  comment: "Floor 0 - Living Room - Hub (NodeMCU ESP32S)"
+  comment: "Living Room - Hub (NodeMCU ESP32S)"
   default_update_interval: 60s
 
 esphome:
