@@ -1,0 +1,77 @@
+substitutions:
+  device_name: masterbedroom_nightstand_2
+  friendly_name: "MasterBedroom Nightstand 2"
+  comment: "Floor 1 - Master Bedroom - Nightstand 2 (NodeMCU ESP32S)"
+
+esphome:
+  name: ${device_name}
+  platform: ESP32
+  board: nodemcu-32s
+  comment: ${comment}
+
+wifi:
+  ssid: !secret base_wifi_ssid
+  password: !secret base_wifi_password
+  power_save_mode: none
+  fast_connect: true
+  manual_ip:
+    static_ip: !secret masterbedroom_nightstand_2_wifi_manual_ip_static_ip
+    subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+<<: !include common/api.yaml
+<<: !include common/ota.yaml
+<<: !include common/logger.yaml
+<<: !include common/web_server.yaml
+
+binary_sensor:
+  - !include common/binary_sensor/status.yaml
+
+sun:
+  latitude: !secret sun_latitude
+  longitude: !secret sun_longitude
+  on_sunrise:
+    then:
+      if:
+        condition:
+          switch.is_on: ${device_name}_autoswitch
+        then:
+          light.turn_off: ${device_name}_light
+  on_sunset:
+    then:
+      if:
+        condition:
+          switch.is_on: ${device_name}_autoswitch
+        then:
+          light.turn_on: ${device_name}_light
+  
+light:
+  - platform: fastled_clockless
+    chipset: WS2812B
+    pin: GPIO23
+    num_leds: 3
+    rgb_order: GRB
+    id: ${device_name}_light
+    name: ${friendly_name} Light
+
+switch:
+  - platform: template
+    name: ${friendly_name} AutoSwitch
+    id: ${device_name}_autoswitch
+    optimistic: True
+    restore_state: True
+
+status_led:
+  pin: GPIO2
+
+text_sensor:
+  - platform: sun
+    name: ${friendly_name} NextTurnOff
+    type: sunrise
+  - platform: sun
+    name: ${friendly_name} NextTurnOn
+    type: sunset
