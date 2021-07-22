@@ -1,0 +1,167 @@
+substitutions:
+  device_name: livingroom_aquarium
+  friendly_name: "LivingRoom Aquarium"
+  comment: "Living Room - Aquarium (Gosund P1 Mod)"
+
+esphome:
+  name: ${device_name}
+  platform: ESP8266
+  board: esp8285
+  comment: ${comment}
+
+wifi:
+  ssid: !secret base_wifi_ssid
+  password: !secret base_wifi_password
+  power_save_mode: none
+  fast_connect: true
+  manual_ip:
+    static_ip: !secret livingroom_aquarium_wifi_manual_ip_static_ip
+    subnet: !secret base_wifi_manual_ip_subnet
+    gateway: !secret base_wifi_manual_ip_gateway
+
+<<: !include common/api.yaml
+<<: !include common/ota.yaml
+<<: !include common/web_server.yaml
+
+logger:
+  baud_rate: 0
+  logs:
+    adc: INFO
+
+status_led:
+  pin:
+    number: GPIO02
+    inverted: True
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+binary_sensor:
+  - !include common/binary_sensor/status.yaml
+  - platform: gpio
+    id: button_main
+    internal: True
+    pin:
+      number: GPIO16
+      mode: INPUT_PULLUP
+      inverted: True
+    on_press:
+      - switch.toggle: switch_usb
+  - platform: template
+    id: button_1
+    internal: true
+    on_press:
+      - switch.toggle: switch_1
+    filters:
+      - delayed_off: 100ms
+  - platform: template
+    id: button_2
+    internal: true
+    on_press:
+      - switch.toggle: switch_2
+    filters:
+      - delayed_off: 100ms
+  - platform: template
+    id: button_3
+    internal: true
+    on_press:
+      - switch.toggle: switch_3
+    filters:
+      - delayed_off: 100ms
+
+switch:
+  - platform: restart
+    id: ${device_name}_restart
+    name: "${friendly_name} - Restart"
+  - platform: gpio
+    pin: GPIO14
+    id: switch_1
+    name: "${friendly_name} - Switch 1"
+    restore_mode: RESTORE_DEFAULT_ON
+    icon: mdi:power-socket-eu
+  - platform: gpio
+    pin: GPIO12
+    id: switch_2
+    name: "${friendly_name} - Switch 2"
+    restore_mode: RESTORE_DEFAULT_ON
+    icon: mdi:power-socket-eu
+  - platform: gpio
+    pin: GPIO13
+    id: switch_3
+    name: "${friendly_name} - Switch 3"
+    restore_mode: RESTORE_DEFAULT_ON
+    icon: mdi:power-socket-eu
+  - platform: gpio
+    pin: GPIO05
+    id: switch_usb
+    name: "${friendly_name} - Switch USB"
+    restore_mode: RESTORE_DEFAULT_ON
+    icon: mdi:power-socket-eu
+    inverted: yes
+
+uart:
+  rx_pin: GPIO03
+  #tx_pin: GPIO01
+  baud_rate: 4800
+
+dallas:
+  - pin: GPIO04
+
+sensor:
+  - platform: dallas
+    address: 0x9D3C01D607A18028
+    id: ${device_name}_temperature
+    name: ${friendly_name} Temperature
+    device_class: temperature
+    filters:
+      - offset: 2.0
+  - platform: cse7766
+    current:
+      id: ${device_name}_current
+      name: ${friendly_name} Current
+      icon: mdi:current-ac
+      device_class: current
+      filters:
+        - multiply: 0.993793
+    voltage:
+      id: ${device_name}_voltage
+      name: ${friendly_name} Voltage
+      icon: mdi:flash-circle
+      device_class: voltage
+      filters:
+        - multiply: 2.410403
+    power:
+      id: ${device_name}_power
+      name: ${friendly_name} Power
+      icon: mdi:flash-outline
+      device_class: power
+      filters:
+        - multiply: 2.438610
+    update_interval: 10s
+  - platform: total_daily_energy
+    id: ${device_name}_total_daily_energy
+    name: ${friendly_name} Total Daily Energy
+    icon: mdi:circle-slice-3
+    power_id: ${device_name}_power
+    device_class: energy
+  - platform: adc
+    pin: GPIO17
+    id: gpio17
+    internal: true
+    update_interval: 0.1s
+    filters:
+      - lambda: |-
+          if (x >= 0.60 && x < 0.90) {
+            id(button_1).publish_state(true);
+          } else if (x >= 0.30 && x < 0.60) {
+            id(button_2).publish_state(true);
+          }
+          else if (x > 0.10 && x < 0.30) {
+            id(button_3).publish_state(true);
+          } else {
+            id(button_1).publish_state(false);
+            id(button_2).publish_state(false);
+            id(button_3).publish_state(false);
+          }
+          return{};
