@@ -1,8 +1,6 @@
 substitutions:
   device_name: livingroom_hub
   friendly_name: LivingRoom Hub
-  miflora_device_name: livingroom_miflora
-  miflora_friendly_name: "LivingRoom MiFlora"
   comment: "Floor 0 - Living Room - Hub (NodeMCU ESP32S)"
   default_update_interval: 60s
 
@@ -31,27 +29,8 @@ i2c:
   - sda: GPIO21
     scl: GPIO22
 
-esp32_ble_tracker:
-
 sensor:
   - !include common/sensor/bme280.yaml
-  - platform: xiaomi_hhccjcy01
-    mac_address: !secret livingroom_miflora_mac
-    temperature:
-      name: ${miflora_friendly_name} Temperature
-      id: ${miflora_device_name}_temperature
-    moisture:
-      name: ${miflora_friendly_name} Moisture
-      id: ${miflora_device_name}_moisture
-    illuminance:
-      name: ${miflora_friendly_name} Brightness
-      id: ${miflora_device_name}_brightness
-    conductivity:
-      name: ${miflora_friendly_name} Conductivity
-      id: ${miflora_device_name}_conductivity
-    battery_level:
-      name: ${miflora_friendly_name} Battery
-      id: ${miflora_device_name}_battery
 
 binary_sensor:
   - !include common/binary_sensor/status.yaml
