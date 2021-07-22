@@ -2,3 +2,4 @@
 platform: status
 name: ${friendly_name} Status
 id: ${device_name}_status
+device_class: connectivity
