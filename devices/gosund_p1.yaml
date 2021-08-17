@@ -1,0 +1,94 @@
+
+
+packages:
+  board: !include "../boards/esp8285.yaml"
+
+binary_sensor:
+  - platform: gpio
+    id: button_main
+    internal: True
+    pin:
+      number: GPIO16
+      mode: INPUT_PULLUP
+      inverted: True
+    on_press:
+      - switch.toggle: switch_usb
+  - platform: template
+    id: button_1
+    internal: true
+    on_press:
+      - switch.toggle: switch_1
+    filters:
+      - delayed_off: 100ms
+  - platform: template
+    id: button_2
+    internal: true
+    on_press:
+      - switch.toggle: switch_2
+    filters:
+      - delayed_off: 100ms
+  - platform: template
+    id: button_3
+    internal: true
+    on_press:
+      - switch.toggle: switch_3
+    filters:
+      - delayed_off: 100ms
+
+switch:
+  - platform: restart
+    id: ${device_name}_restart
+    name: "${friendly_name} - Restart"
+  - platform: gpio
+    pin: GPIO14
+    id: switch_1
+    name: "${friendly_name} - Switch 1"
+    restore_mode: RESTORE_DEFAULT_ON
+    icon: mdi:power-socket-eu
+  - platform: gpio
+    pin: GPIO12
+    id: switch_2
+    name: "${friendly_name} - Switch 2"
+    restore_mode: RESTORE_DEFAULT_ON
+    icon: mdi:power-socket-eu
+  - platform: gpio
+    pin: GPIO13
+    id: switch_3
+    name: "${friendly_name} - Switch 3"
+    restore_mode: RESTORE_DEFAULT_ON
+    icon: mdi:power-socket-eu
+  - platform: gpio
+    pin: GPIO05
+    id: switch_usb
+    name: "${friendly_name} - Switch USB"
+    restore_mode: RESTORE_DEFAULT_ON
+    icon: mdi:power-socket-eu
+    inverted: yes
+
+sensor:
+  - platform: adc
+    pin: GPIO17
+    id: gpio17
+    internal: true
+    update_interval: 0.1s
+    filters:
+      - lambda: |-
+          if (x >= 0.60 && x < 0.90) {
+            id(button_1).publish_state(true);
+          } else if (x >= 0.30 && x < 0.60) {
+            id(button_2).publish_state(true);
+          }
+          else if (x > 0.10 && x < 0.30) {
+            id(button_3).publish_state(true);
+          } else {
+            id(button_1).publish_state(false);
+            id(button_2).publish_state(false);
+            id(button_3).publish_state(false);
+          }
+          return{};
+
+# Using the Circle Led as Status Indicator
+status_led:
+  pin:
+    number: GPIO02
+    inverted: True

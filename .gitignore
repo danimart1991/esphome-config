@@ -9,6 +9,8 @@
 !common/*
 !components
 !components/*
+!devices
+!devices/*
 !sensors
 !sensors/*
 !*.yaml
