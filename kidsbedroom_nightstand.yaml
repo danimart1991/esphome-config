@@ -19,9 +19,8 @@ wifi:
     subnet: !secret base_wifi_manual_ip_subnet
     gateway: !secret base_wifi_manual_ip_gateway
 
-time:
-  - platform: homeassistant
-    id: homeassistant_time
+packages:
+  time: !include components/time.yaml
 
 <<: !include common/api.yaml
 <<: !include common/ota.yaml

@@ -19,9 +19,8 @@ wifi:
     subnet: !secret base_wifi_manual_ip_subnet
     gateway: !secret base_wifi_manual_ip_gateway
 
-time:
-  - platform: homeassistant
-    id: homeassistant_time
+packages:
+  time: !include components/time.yaml
 
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
@@ -88,13 +87,5 @@ sensor:
         - multiply: 0.151472
     change_mode_every: 1
     update_interval: 10s
-
-  - platform: total_daily_energy
-    id: ${device_name}_total_daily_energy
-    name: ${friendly_name} Total Daily Energy
-    icon: mdi:circle-slice-3
+  - <<: !include sensors/electricity/total_daily_energy.yaml
     power_id: ${device_name}_power
-    filters:
-      # Multiplication factor from W to kW is 0.001
-      - multiply: 0.001
-    unit_of_measurement: kWh

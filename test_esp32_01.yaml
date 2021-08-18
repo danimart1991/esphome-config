@@ -28,6 +28,9 @@ wifi:
 #logger:
   #baud_rate: 0
 
+packages:
+  time: !include components/time.yaml
+
 uart:
   rx_pin: GPIO16
   tx_pin: GPIO17
@@ -43,12 +46,15 @@ sensor:
     energy:
       name: "PZEM-004T V3 Energy"
     power:
+      id: device_power
       name: "PZEM-004T V3 Power"
     frequency:
       name: "PZEM-004T V3 Frequency"
     power_factor:
       name: "PZEM-004T V3 Power Factor"
     update_interval: 1s
+  - <<: !include sensors/electricity/total_daily_energy.yaml
+    power_id: device_power
 
 binary_sensor:
   - !include common/binary_sensor/status.yaml

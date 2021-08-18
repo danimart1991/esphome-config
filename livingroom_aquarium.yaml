@@ -33,9 +33,8 @@ status_led:
     number: GPIO02
     inverted: True
 
-time:
-  - platform: homeassistant
-    id: homeassistant_time
+packages:
+  time: !include components/time.yaml
 
 binary_sensor:
   - !include common/binary_sensor/status.yaml
@@ -139,12 +138,8 @@ sensor:
       filters:
         - multiply: 2.438610
     update_interval: 10s
-  - platform: total_daily_energy
-    id: ${device_name}_total_daily_energy
-    name: ${friendly_name} Total Daily Energy
-    icon: mdi:circle-slice-3
+  - <<: !include sensors/electricity/total_daily_energy.yaml
     power_id: ${device_name}_power
-    device_class: energy
   - platform: adc
     pin: GPIO17
     id: gpio17
