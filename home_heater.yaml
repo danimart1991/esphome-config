@@ -2,6 +2,7 @@ substitutions:
   device_name: home_heater
   friendly_name: Home Heater
   comment: "Home - Heater (Sonoff Basic R2 Dry Contact Mod)"
+  wifi_manual_ip_static_ip: !secret home_heater_wifi_manual_ip_static_ip
 
 esphome:
   name: ${device_name}
@@ -9,15 +10,8 @@ esphome:
   board: esp01_1m
   comment: ${comment}
 
-wifi:
-  ssid: !secret base_wifi_ssid
-  password: !secret base_wifi_password
-  power_save_mode: none
-  fast_connect: true
-  manual_ip:
-    static_ip: !secret home_heater_wifi_manual_ip_static_ip
-    subnet: !secret base_wifi_manual_ip_subnet
-    gateway: !secret base_wifi_manual_ip_gateway
+packages:
+  wifi: !include components/wifi.yaml
 
 <<: !include common/api.yaml
 <<: !include common/ota.yaml

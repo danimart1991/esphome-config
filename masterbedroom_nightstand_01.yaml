@@ -2,6 +2,7 @@ substitutions:
   device_name: masterbedroom_nightstand_01
   friendly_name: "MasterBedroom Nightstand 01"
   comment: "Master Bedroom - Nightstand 01 (NodeMCU ESP32S)"
+  wifi_manual_ip_static_ip: !secret masterbedroom_nightstand_01_wifi_manual_ip_static_ip
 
 esphome:
   name: ${device_name}
@@ -9,18 +10,9 @@ esphome:
   board: nodemcu-32s
   comment: ${comment}
 
-wifi:
-  ssid: !secret base_wifi_ssid
-  password: !secret base_wifi_password
-  power_save_mode: none
-  fast_connect: true
-  manual_ip:
-    static_ip: !secret masterbedroom_nightstand_01_wifi_manual_ip_static_ip
-    subnet: !secret base_wifi_manual_ip_subnet
-    gateway: !secret base_wifi_manual_ip_gateway
-
 packages:
   time: !include components/time.yaml
+  wifi: !include components/wifi.yaml
 
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
