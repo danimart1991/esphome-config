@@ -1,0 +1,8 @@
+# ESPHome Core Configuration
+#
+# https://esphome.io/components/esphome.html
+#
+
+---
+name: ${device_name}
+comment: ${comment}

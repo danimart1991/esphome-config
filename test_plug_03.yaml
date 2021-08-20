@@ -5,10 +5,9 @@ substitutions:
   wifi_manual_ip_static_ip: !secret test_plug_03_wifi_manual_ip_static_ip
 
 esphome:
-  name: ${device_name}
+  <<: !include components/esphome.yaml
   platform: ESP8266
   board: esp01_1m
-  comment: ${comment}
 
 packages:
   time: !include components/time.yaml

@@ -6,10 +6,9 @@ substitutions:
   default_update_interval: 60s
 
 esphome:
-  name: ${device_name}
+  <<: !include components/esphome.yaml
   platform: ESP32
   board: esp32dev
-  comment: ${comment}
 
 packages:
   wifi: !include components/wifi.yaml

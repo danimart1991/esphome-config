@@ -6,10 +6,9 @@ substitutions:
   default_update_interval: 60s
 
 esphome:
-  name: ${device_name}
+  <<: !include components/esphome.yaml
   platform: ESP8266
   board: nodemcuv2
-  comment: ${comment}
 
 packages:
   wifi: !include components/wifi.yaml

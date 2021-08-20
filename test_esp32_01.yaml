@@ -6,10 +6,9 @@ substitutions:
   default_update_interval: 60s
 
 esphome:
-  name: ${device_name}
+  <<: !include components/esphome.yaml
   platform: ESP32
   board: nodemcu-32s
-  comment: ${comment}
 
 packages:
   time: !include components/time.yaml
