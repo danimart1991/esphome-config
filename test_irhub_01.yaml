@@ -5,15 +5,13 @@ substitutions:
   wifi_manual_ip_static_ip: !secret test_irhub_01_wifi_manual_ip_static_ip
 
 esphome:
-  <<: !include components/esphome.yaml
-  platform: ESP8266
-  board: esp01_1m
   on_boot:
     priority: 100 # Highest priority, ensures light turns on without delay.
     then:
       - light.turn_on: ${device_name}_light
 
 packages:
+  board: !include boards/esp01_1m.yaml
   wifi: !include components/wifi.yaml
 
 <<: !include common/api.yaml

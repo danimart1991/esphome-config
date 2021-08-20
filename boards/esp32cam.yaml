@@ -1,0 +1,12 @@
+# AI Thinker ESP32-CAM board. Small Camera Module to build little projects.
+#
+# https://docs.platformio.org/en/latest/boards/espressif32/esp32cam.html
+# http://www.ai-thinker.com/pro_view-24.html
+# https://amzn.to/3mhZa3r
+#
+
+---
+esphome:
+  <<: !include "../components/esphome.yaml"
+  platform: ESP32
+  board: esp32cam

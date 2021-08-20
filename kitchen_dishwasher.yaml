@@ -4,12 +4,8 @@ substitutions:
   comment: "Kitchen - Dishwasher (Plug Blitzwolf SHP2 V2.3)"
   wifi_manual_ip_static_ip: !secret kitchen_dishwasher_wifi_manual_ip_static_ip
 
-esphome:
-  <<: !include components/esphome.yaml
-  platform: ESP8266
-  board: esp8285
-
 packages:
+  board: !include boards/esp8285.yaml
   time: !include components/time.yaml
   wifi: !include components/wifi.yaml
 

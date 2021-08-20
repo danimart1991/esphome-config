@@ -4,12 +4,8 @@ substitutions:
   comment: "Floor 1 - Master Bedroom - Nightstand 2 (NodeMCU ESP32S)"
   wifi_manual_ip_static_ip: !secret masterbedroom_nightstand_02_wifi_manual_ip_static_ip
 
-esphome:
-  <<: !include components/esphome.yaml
-  platform: ESP32
-  board: nodemcu-32s
-
 packages:
+  board: !include boards/nodemcu-32s.yaml
   time: !include components/time.yaml
   wifi: !include components/wifi.yaml
 

@@ -3,6 +3,8 @@
 *
 
 # You can whitelist files/folders with !, these will not be ignored.
+!boards
+!boards/*
 !common
 !common/*
 !components

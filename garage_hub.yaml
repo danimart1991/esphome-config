@@ -5,12 +5,8 @@ substitutions:
   wifi_manual_ip_static_ip: !secret garage_hub_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
-esphome:
-  <<: !include components/esphome.yaml
-  platform: ESP32
-  board: nodemcu-32s
-
 packages:
+  board: !include boards/nodemcu-32s.yaml
   wifi: !include components/wifi.yaml
 
 <<: !include common/api.yaml

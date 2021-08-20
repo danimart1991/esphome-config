@@ -4,12 +4,8 @@ substitutions:
   comment: "Home - Heater (Sonoff Basic R2 Dry Contact Mod)"
   wifi_manual_ip_static_ip: !secret home_heater_wifi_manual_ip_static_ip
 
-esphome:
-  <<: !include components/esphome.yaml
-  platform: ESP8266
-  board: esp01_1m
-
 packages:
+  board: !include boards/esp01_1m.yaml
   wifi: !include components/wifi.yaml
 
 <<: !include common/api.yaml
