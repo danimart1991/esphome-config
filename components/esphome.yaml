@@ -6,3 +6,4 @@
 ---
 name: ${device_name}
 comment: ${comment}
+build_path: ".build/${device_name}/"
