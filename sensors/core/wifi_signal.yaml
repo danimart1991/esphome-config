@@ -1,0 +1,15 @@
+---
+# WiFi Signal Sensor
+#
+# The wifi_signal sensor platform allows you to read the signal strength of the currently
+# connected WiFi Access Point.
+#
+# The sensor value is the "Received signal strength" measured in decibel-milliwatts (dBm).
+# These values are always negative and the closer they are to zero, the better the signal is.
+#
+# https://esphome.io/components/sensor/wifi_signal.html 
+#
+
+platform: wifi_signal
+name: "${friendly_name} WiFi Signal"
+update_interval: 60s

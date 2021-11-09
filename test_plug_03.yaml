@@ -76,3 +76,4 @@ sensor:
     update_interval: 10s
   - <<: !include sensors/electricity/total_daily_energy.yaml
     power_id: ${device_name}_power
+  - !include sensors/core/wifi_signal.yaml

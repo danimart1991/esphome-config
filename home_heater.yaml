@@ -25,6 +25,9 @@ binary_sensor:
       - switch.toggle: ${device_name}_switch
   - !include common/binary_sensor/status.yaml
 
+sensor:
+  - !include sensors/core/wifi_signal.yaml
+
 status_led:
   pin:
     number: GPIO13

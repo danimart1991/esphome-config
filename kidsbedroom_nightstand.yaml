@@ -17,6 +17,9 @@ packages:
 binary_sensor:
   - !include common/binary_sensor/status.yaml
 
+sensor:
+  - !include sensors/core/wifi_signal.yaml
+
 sun:
   latitude: !secret sun_latitude
   longitude: !secret sun_longitude

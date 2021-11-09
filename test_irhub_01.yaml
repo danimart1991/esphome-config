@@ -35,6 +35,9 @@ remote_receiver:
 binary_sensor:
   - !include common/binary_sensor/status.yaml
 
+sensor:
+  - !include sensors/core/wifi_signal.yaml
+
 switch:
   - platform: gpio
     id: ${device_name}_switch

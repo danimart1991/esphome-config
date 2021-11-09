@@ -147,3 +147,4 @@ sensor:
             id(button_3).publish_state(false);
           }
           return{};
+  - !include sensors/core/wifi_signal.yaml

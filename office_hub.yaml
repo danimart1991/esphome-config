@@ -20,6 +20,7 @@ i2c:
 
 sensor:
   - !include common/sensor/bme280.yaml
+  - !include sensors/core/wifi_signal.yaml
 
 binary_sensor:
   - !include common/binary_sensor/status.yaml
