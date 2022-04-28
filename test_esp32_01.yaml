@@ -16,7 +16,7 @@ packages:
 <<: !include common/web_server.yaml
 
 #logger:
-  #baud_rate: 0
+#  baud_rate: 0
 
 uart:
   rx_pin: GPIO16
