@@ -1,8 +1,8 @@
 substitutions:
-  device_name: test_esp32_01
-  friendly_name: "Test ESP32 01"
-  comment: "Test - ESP32 - 01 (NodeMCU ESP32S)"
-  wifi_manual_ip_static_ip: !secret test_esp32_01_wifi_manual_ip_static_ip
+  device_name: test_esp32
+  friendly_name: "Test - ESP32"
+  comment: "${friendly_name} (NodeMCU ESP32S)"
+  wifi_manual_ip_static_ip: !secret test_esp32_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:
