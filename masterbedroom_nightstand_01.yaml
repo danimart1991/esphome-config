@@ -1,7 +1,7 @@
 substitutions:
   device_name: masterbedroom_nightstand_01
-  friendly_name: "MasterBedroom Nightstand 01"
-  comment: "Master Bedroom - Nightstand 01 (NodeMCU ESP32S)"
+  friendly_name: "Master Bedroom - Nightstand 01"
+  comment: "${friendly_name} (NodeMCU ESP32S)"
   wifi_manual_ip_static_ip: !secret masterbedroom_nightstand_01_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
@@ -46,11 +46,11 @@ light:
     num_leds: 3
     rgb_order: GRB
     id: light_id
-    name: ${friendly_name} Light
+    name: ${friendly_name} - Light
 
 switch:
   - platform: template
-    name: ${friendly_name} AutoSwitch
+    name: ${friendly_name} - AutoSwitch
     id: autoswitch_id
     optimistic: True
     restore_state: True
@@ -60,8 +60,8 @@ status_led:
 
 text_sensor:
   - platform: sun
-    name: ${friendly_name} NextTurnOff
+    name: ${friendly_name} - NextTurnOff
     type: sunrise
   - platform: sun
-    name: ${friendly_name} NextTurnOn
+    name: ${friendly_name} - NextTurnOn
     type: sunset

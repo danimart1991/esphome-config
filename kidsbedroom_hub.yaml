@@ -1,7 +1,7 @@
 substitutions:
   device_name: kidsbedroom_hub
-  friendly_name: KidsBedroom Hub
-  comment: "Kids Bedroom - Hub (NodeMCU ESP8266)"
+  friendly_name: "Kids Bedroom - Hub"
+  comment: "${friendly_name} (NodeMCU ESP8266)"
   wifi_manual_ip_static_ip: !secret kidsbedroom_hub_wifi_manual_ip_static_ip
   default_update_interval: 60s
 

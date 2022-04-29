@@ -2,12 +2,12 @@
 platform: bme280
 update_interval: ${default_update_interval}
 temperature:
-  name: ${friendly_name} Temperature
+  name: ${friendly_name} - Temperature
   device_class: temperature
 pressure:
-  name: ${friendly_name} Pressure
+  name: ${friendly_name} - Pressure
   device_class: pressure
 humidity:
-  name: ${friendly_name} Humidity
+  name: ${friendly_name} - Humidity
   device_class: humidity
 address: 0x76

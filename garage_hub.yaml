@@ -1,7 +1,7 @@
 substitutions:
   device_name: garage_hub
-  friendly_name: Garage Hub
-  comment: "Floor 0 - Garage - Hub (NodeMCU ESP32S)"
+  friendly_name: "Garage - Hub"
+  comment: "${friendly_name} (NodeMCU ESP32S)"
   wifi_manual_ip_static_ip: !secret garage_hub_wifi_manual_ip_static_ip
   default_update_interval: 60s
 

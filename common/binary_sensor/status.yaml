@@ -1,4 +1,4 @@
 ---
 platform: status
-name: ${friendly_name} Status
+name: ${friendly_name} - Status
 device_class: connectivity

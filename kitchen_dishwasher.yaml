@@ -1,7 +1,7 @@
 substitutions:
   device_name: kitchen_dishwasher
-  friendly_name: Kitchen Dishwasher
-  comment: "Kitchen - Dishwasher (Plug Blitzwolf SHP2 V2.3)"
+  friendly_name: "Kitchen - Dishwasher"
+  comment: "${friendly_name} (Plug Blitzwolf SHP2 V2.3)"
   wifi_manual_ip_static_ip: !secret kitchen_dishwasher_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
@@ -30,7 +30,7 @@ binary_sensor:
 switch:
   - platform: gpio
     id: switch_id
-    name: ${friendly_name} Switch
+    name: ${friendly_name} - Switch
     restore_mode: RESTORE_DEFAULT_OFF
     pin: GPIO14
     on_turn_on:
@@ -59,20 +59,20 @@ sensor:
     cf_pin: GPIO04
     cf1_pin: GPIO05
     current:
-      name: ${friendly_name} Current
+      name: ${friendly_name} - Current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
         - multiply: 0.829134
     voltage:
-      name: ${friendly_name} Voltage
+      name: ${friendly_name} - Voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
         - multiply: 0.402105
     power:
       id: power_id
-      name: ${friendly_name} Power
+      name: ${friendly_name} - Power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:

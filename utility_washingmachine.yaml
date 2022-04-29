@@ -1,7 +1,7 @@
 substitutions:
   device_name: utility_washingmachine
-  friendly_name: "Utility WashingMachine"
-  comment: "Utility - Washing Machine (Plug AWOW EU3S)"
+  friendly_name: "Utility - Washing Machine"
+  comment: "${friendly_name} (Plug AWOW EU3S)"
   wifi_manual_ip_static_ip: !secret utility_washingmachine_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
@@ -54,20 +54,20 @@ sensor:
     cf_pin: GPIO05
     cf1_pin: GPIO14
     current:
-      name: ${friendly_name} Current
+      name: ${friendly_name} - Current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
         - multiply: 0.746064
     voltage:
-      name: ${friendly_name} Voltage
+      name: ${friendly_name} - Voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
         - multiply: 0.420251
     power:
       id: power_id
-      name: ${friendly_name} Power
+      name: ${friendly_name} - Power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:

@@ -1,7 +1,7 @@
 substitutions:
   device_name: office_deskplug
-  friendly_name: "Office DeskPlug"
-  comment: "Office - Desk Plug (Plug AWOW EU3S)"
+  friendly_name: "Office - Desk Plug"
+  comment: "${friendly_name} (Plug AWOW EU3S)"
   wifi_manual_ip_static_ip: !secret office_deskplug_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
@@ -30,7 +30,7 @@ binary_sensor:
 switch:
   - platform: gpio
     id: switch_id
-    name: ${friendly_name} Switch
+    name: ${friendly_name} - Switch
     restore_mode: RESTORE_DEFAULT_OFF
     pin: GPIO15
     on_turn_on:
@@ -53,20 +53,20 @@ sensor:
     cf_pin: GPIO05
     cf1_pin: GPIO14
     current:
-      name: ${friendly_name} Current
+      name: ${friendly_name} - Current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
         - multiply: 0.713100
     voltage:
-      name: ${friendly_name} Voltage
+      name: ${friendly_name} - Voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
         - multiply: 0.404015
     power:
       id: power_id
-      name: ${friendly_name} Power
+      name: ${friendly_name} - Power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:

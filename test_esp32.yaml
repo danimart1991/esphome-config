@@ -27,18 +27,18 @@ uart:
 sensor:
   - platform: pzemac
     current:
-      name: "PZEM-004T V3 Current"
+      name: "PZEM-004T V3 - Current"
     voltage:
-      name: "PZEM-004T V3 Voltage"
+      name: "PZEM-004T V3 - Voltage"
     energy:
-      name: "PZEM-004T V3 Energy"
+      name: "PZEM-004T V3 - Energy"
     power:
       id: power_id
-      name: "PZEM-004T V3 Power"
+      name: "PZEM-004T V3 - Power"
     frequency:
-      name: "PZEM-004T V3 Frequency"
+      name: "PZEM-004T V3 - Frequency"
     power_factor:
-      name: "PZEM-004T V3 Power Factor"
+      name: "PZEM-004T V3 - Power Factor"
     update_interval: 1s
   - <<: !include sensors/electricity/total_daily_energy.yaml
     power_id: power_id
