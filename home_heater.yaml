@@ -20,10 +20,10 @@ binary_sensor:
       number: GPIO0
       mode: INPUT_PULLUP
       inverted: True
-    id: ${device_name}_button
+    id: button_id
     internal: True
     on_press:
-      - switch.toggle: ${device_name}_switch
+      - switch.toggle: switch_id
   - !include common/binary_sensor/status.yaml
 
 sensor:
@@ -37,5 +37,5 @@ status_led:
 switch:
   - platform: gpio
     pin: GPIO12
-    id: ${device_name}_switch
+    id: switch_id
     name: ${friendly_name} Switch

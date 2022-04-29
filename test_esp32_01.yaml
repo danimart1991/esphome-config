@@ -33,7 +33,7 @@ sensor:
     energy:
       name: "PZEM-004T V3 Energy"
     power:
-      id: device_power
+      id: power_id
       name: "PZEM-004T V3 Power"
     frequency:
       name: "PZEM-004T V3 Frequency"
@@ -41,7 +41,7 @@ sensor:
       name: "PZEM-004T V3 Power Factor"
     update_interval: 1s
   - <<: !include sensors/electricity/total_daily_energy.yaml
-    power_id: device_power
+    power_id: power_id
   - !include sensors/core/wifi_signal.yaml
 
 binary_sensor:

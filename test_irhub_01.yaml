@@ -9,7 +9,7 @@ esphome:
   on_boot:
     priority: 100 # Highest priority, ensures light turns on without delay.
     then:
-      - light.turn_on: ${device_name}_light
+      - light.turn_on: light_id
 
 packages:
   board: !include boards/esp01_1m.yaml
@@ -41,24 +41,24 @@ sensor:
 
 switch:
   - platform: gpio
-    id: ${device_name}_switch
+    id: switch_id
 
     restore_mode: RESTORE_DEFAULT_OFF
     pin: GPIO13
     on_turn_on:
-      - switch.turn_on: ${device_name}_restart
+      - switch.turn_on: restart_id
   - platform: restart
-    id: ${device_name}_restart
+    id: restart_id
     name: ${friendly_name} Restart
 
 output:
   - platform: esp8266_pwm
-    id: ${device_name}_led
+    id: led_id
     pin:
       number: GPIO4
       inverted: True
 
 light:
   - platform: monochromatic
-    output: ${device_name}_led
-    id: ${device_name}_light
+    output: led_id
+    id: light_id

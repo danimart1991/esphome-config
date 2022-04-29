@@ -10,4 +10,3 @@
 
 time:
   platform: homeassistant
-  id: time_homeassistant

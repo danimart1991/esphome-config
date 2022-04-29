@@ -17,29 +17,29 @@ packages:
 
 binary_sensor:
   - platform: gpio
-    id: ${device_name}_button
+    id: button_id
     internal: True
     pin:
       number: GPIO13
       mode: INPUT_PULLUP
       inverted: True
     on_press:
-      - switch.toggle: ${device_name}_switch
+      - switch.toggle: switch_id
   - !include common/binary_sensor/status.yaml
 
 switch:
   - platform: gpio
-    id: ${device_name}_switch
-    name: ${friendly_name} Switch
+    id: switch_id
+    name: ${friendly_name} - Switch
     restore_mode: RESTORE_DEFAULT_OFF
     pin: GPIO15
     on_turn_on:
-      - switch.turn_on: ${device_name}_led
+      - switch.turn_on: led_id
     on_turn_off:
-      - switch.turn_off: ${device_name}_led
+      - switch.turn_off: led_id
 
   - platform: gpio
-    id: ${device_name}_led
+    id: led_id
     internal: True
     restore_mode: RESTORE_DEFAULT_OFF
     pin:
@@ -54,21 +54,19 @@ sensor:
     cf_pin: GPIO05
     cf1_pin: GPIO14
     current:
-      id: ${device_name}_current
       name: ${friendly_name} Current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
         - multiply: 0.746064
     voltage:
-      id: ${device_name}_voltage
       name: ${friendly_name} Voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
         - multiply: 0.420251
     power:
-      id: ${device_name}_power
+      id: power_id
       name: ${friendly_name} Power
       icon: mdi:flash-outline
       unit_of_measurement: W
@@ -77,5 +75,5 @@ sensor:
     change_mode_every: 1
     update_interval: 10s
   - <<: !include sensors/electricity/total_daily_energy.yaml
-    power_id: ${device_name}_power
+    power_id: power_id
   - !include sensors/core/wifi_signal.yaml

@@ -28,16 +28,16 @@ sun:
     then:
       if:
         condition:
-          switch.is_on: ${device_name}_autoswitch
+          switch.is_on: autoswitch_id
         then:
-          light.turn_off: ${device_name}_light
+          light.turn_off: light_id
   on_sunset:
     then:
       if:
         condition:
-          switch.is_on: ${device_name}_autoswitch
+          switch.is_on: autoswitch_id
         then:
-          light.turn_on: ${device_name}_light
+          light.turn_on: light_id
 
 light:
   - platform: fastled_clockless
@@ -45,13 +45,13 @@ light:
     pin: GPIO23
     num_leds: 3
     rgb_order: GRB
-    id: ${device_name}_light
+    id: light_id
     name: ${friendly_name} Light
 
 switch:
   - platform: template
     name: ${friendly_name} AutoSwitch
-    id: ${device_name}_autoswitch
+    id: autoswitch_id
     optimistic: True
     restore_state: True
 
