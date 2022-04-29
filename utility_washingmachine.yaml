@@ -3,6 +3,7 @@ substitutions:
   friendly_name: "Utility WashingMachine"
   comment: "Utility - Washing Machine (Plug AWOW EU3S)"
   wifi_manual_ip_static_ip: !secret utility_washingmachine_wifi_manual_ip_static_ip
+  default_update_interval: 60s
 
 packages:
   board: !include boards/esp01_1m.yaml

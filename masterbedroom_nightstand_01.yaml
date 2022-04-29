@@ -3,6 +3,7 @@ substitutions:
   friendly_name: "MasterBedroom Nightstand 01"
   comment: "Master Bedroom - Nightstand 01 (NodeMCU ESP32S)"
   wifi_manual_ip_static_ip: !secret masterbedroom_nightstand_01_wifi_manual_ip_static_ip
+  default_update_interval: 60s
 
 packages:
   board: !include boards/nodemcu-32s.yaml

@@ -3,6 +3,7 @@ substitutions:
   friendly_name: Test IRHub 01
   comment: "Test - IR Hub - 01 (FK-UFO-R1)"
   wifi_manual_ip_static_ip: !secret test_irhub_01_wifi_manual_ip_static_ip
+  default_update_interval: 60s
 
 esphome:
   on_boot:
