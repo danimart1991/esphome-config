@@ -1,6 +1,6 @@
 substitutions:
   device_name: test_plug
-  friendly_name: "Test Plug"
+  friendly_name: "Test - Plug"
   comment: "${friendly_name} (Plug AWOW EU3S)"
   wifi_manual_ip_static_ip: !secret test_plug_wifi_manual_ip_static_ip
   default_update_interval: 60s

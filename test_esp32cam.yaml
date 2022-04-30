@@ -1,8 +1,8 @@
 substitutions:
   device_name: test_esp32cam
-  friendly_name: "Test ESP32CAM"
+  friendly_name: "Test - ESP32CAM"
   comment: "${friendly_name} (ESP32-CAM)"
-  wifi_manual_ip_static_ip: !secret test_esp32cam_01_wifi_manual_ip_static_ip
+  wifi_manual_ip_static_ip: !secret test_esp32cam_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:
