@@ -1,8 +1,8 @@
 substitutions:
-  device_name: office_hub
-  friendly_name: "Office - Hub"
+  device_name: garage-hub
+  friendly_name: "Garage - Hub"
   comment: "${friendly_name} (NodeMCU ESP32S)"
-  wifi_manual_ip_static_ip: !secret office_hub_wifi_manual_ip_static_ip
+  wifi_manual_ip_static_ip: !secret garage-hub_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:

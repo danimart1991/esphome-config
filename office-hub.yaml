@@ -1,12 +1,12 @@
 substitutions:
-  device_name: kidsbedroom_hub
-  friendly_name: "Kids Bedroom - Hub"
-  comment: "${friendly_name} (NodeMCU ESP8266)"
-  wifi_manual_ip_static_ip: !secret kidsbedroom_hub_wifi_manual_ip_static_ip
+  device_name: office-hub
+  friendly_name: "Office - Hub"
+  comment: "${friendly_name} (NodeMCU ESP32S)"
+  wifi_manual_ip_static_ip: !secret office-hub_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:
-  board: !include boards/nodemcuv2.yaml
+  board: !include boards/nodemcu-32s.yaml
   wifi: !include components/wifi.yaml
 
 <<: !include common/api.yaml
@@ -15,8 +15,8 @@ packages:
 <<: !include common/web_server.yaml
 
 i2c:
-  - sda: D2
-    scl: D1
+  - sda: GPIO21
+    scl: GPIO22
 
 sensor:
   - !include common/sensor/bme280.yaml
@@ -26,6 +26,4 @@ binary_sensor:
   - !include common/binary_sensor/status.yaml
 
 status_led:
-  pin:
-    number: D0
-    inverted: True
+  pin: GPIO2

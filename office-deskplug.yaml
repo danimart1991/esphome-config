@@ -1,12 +1,12 @@
 substitutions:
-  device_name: kitchen_dishwasher
-  friendly_name: "Kitchen - Dishwasher"
-  comment: "${friendly_name} (Plug Blitzwolf SHP2 V2.3)"
-  wifi_manual_ip_static_ip: !secret kitchen_dishwasher_wifi_manual_ip_static_ip
+  device_name: office-deskplug
+  friendly_name: "Office - Desk Plug"
+  comment: "${friendly_name} (Plug AWOW EU3S)"
+  wifi_manual_ip_static_ip: !secret office-deskplug_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:
-  board: !include boards/esp8285.yaml
+  board: !include boards/esp01_1m.yaml
   time: !include components/time.yaml
   wifi: !include components/wifi.yaml
 
@@ -20,7 +20,7 @@ binary_sensor:
     id: button_id
     internal: True
     pin:
-      number: GPIO3
+      number: GPIO13
       mode: INPUT_PULLUP
       inverted: True
     on_press:
@@ -32,51 +32,45 @@ switch:
     id: switch_id
     name: ${friendly_name} - Switch
     restore_mode: RESTORE_DEFAULT_OFF
-    pin: GPIO14
+    pin: GPIO15
     on_turn_on:
-      - switch.turn_on: blue_led_id
+      - switch.turn_on: led_id
     on_turn_off:
-      - switch.turn_off: blue_led_id
-
+      - switch.turn_off: led_id
   - platform: gpio
-    id: blue_led_id
+    id: led_id
     internal: True
     restore_mode: RESTORE_DEFAULT_OFF
     pin:
-      number: GPIO01
+      number: GPIO02
       inverted: True
-
-status_led:
-  pin:
-    number: GPIO13
-    inverted: True
 
 sensor:
   - platform: hlw8012
     sel_pin:
       number: GPIO12
       inverted: True
-    cf_pin: GPIO04
-    cf1_pin: GPIO05
+    cf_pin: GPIO05
+    cf1_pin: GPIO14
     current:
       name: ${friendly_name} - Current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
-        - multiply: 0.829134
+        - multiply: 0.713100
     voltage:
       name: ${friendly_name} - Voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
-        - multiply: 0.402105
+        - multiply: 0.404015
     power:
       id: power_id
       name: ${friendly_name} - Power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:
-        - multiply: 0.177739
+        - multiply: 0.151556
     change_mode_every: 1
     update_interval: 10s
   - <<: !include sensors/electricity/total_daily_energy.yaml

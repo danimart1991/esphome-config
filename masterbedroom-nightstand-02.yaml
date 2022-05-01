@@ -1,8 +1,8 @@
 substitutions:
-  device_name: masterbedroom_nightstand_01
-  friendly_name: "Master Bedroom - Nightstand 01"
+  device_name: masterbedroom-nightstand-02
+  friendly_name: "Master Bedroom - Nightstand 02"
   comment: "${friendly_name} (NodeMCU ESP32S)"
-  wifi_manual_ip_static_ip: !secret masterbedroom_nightstand_01_wifi_manual_ip_static_ip
+  wifi_manual_ip_static_ip: !secret masterbedroom-nightstand-02_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:

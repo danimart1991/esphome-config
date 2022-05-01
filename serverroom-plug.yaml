@@ -1,8 +1,8 @@
 substitutions:
-  device_name: serverroom_plug
+  device_name: serverroom-plug
   friendly_name: "Server Room - Plug"
   comment: "${friendly_name} (Plug AWOW EU3S)"
-  wifi_manual_ip_static_ip: !secret serverroom_plug_wifi_manual_ip_static_ip
+  wifi_manual_ip_static_ip: !secret serverroom-plug_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:

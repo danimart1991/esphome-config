@@ -1,8 +1,8 @@
 substitutions:
-  device_name: livingroom_hub
+  device_name: livingroom-hub
   friendly_name: "Living Room - Hub"
   comment: "${friendly_name} (NodeMCU ESP32S)"
-  wifi_manual_ip_static_ip: !secret livingroom_hub_wifi_manual_ip_static_ip
+  wifi_manual_ip_static_ip: !secret livingroom-hub_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:

@@ -1,8 +1,8 @@
 substitutions:
-  device_name: office_deskplug
-  friendly_name: "Office - Desk Plug"
+  device_name: utility-washingmachine
+  friendly_name: "Utility - Washing Machine"
   comment: "${friendly_name} (Plug AWOW EU3S)"
-  wifi_manual_ip_static_ip: !secret office_deskplug_wifi_manual_ip_static_ip
+  wifi_manual_ip_static_ip: !secret utility-washingmachine_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:
@@ -37,6 +37,7 @@ switch:
       - switch.turn_on: led_id
     on_turn_off:
       - switch.turn_off: led_id
+
   - platform: gpio
     id: led_id
     internal: True
@@ -57,20 +58,20 @@ sensor:
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
-        - multiply: 0.713100
+        - multiply: 0.746064
     voltage:
       name: ${friendly_name} - Voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
-        - multiply: 0.404015
+        - multiply: 0.420251
     power:
       id: power_id
       name: ${friendly_name} - Power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:
-        - multiply: 0.151556
+        - multiply: 0.159374
     change_mode_every: 1
     update_interval: 10s
   - <<: !include sensors/electricity/total_daily_energy.yaml
