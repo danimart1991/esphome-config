@@ -8,5 +8,6 @@
 ---
 esphome:
   <<: !include "../components/esphome.yaml"
-  platform: ESP8266
+
+esp8266:
   board: nodemcuv2
