@@ -56,9 +56,6 @@ binary_sensor:
       - delayed_off: 100ms
 
 switch:
-  - platform: restart
-    id: restart_id
-    name: "${friendly_name} - Restart"
   - platform: gpio
     pin: GPIO14
     id: switch_1_id
