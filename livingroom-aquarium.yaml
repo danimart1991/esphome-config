@@ -31,8 +31,6 @@ binary_sensor:
     internal: True
     pin:
       number: GPIO16
-      mode: INPUT_PULLUP
-      inverted: True
     on_press:
       - switch.toggle: switch_usb_id
   - platform: template
