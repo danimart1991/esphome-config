@@ -4,8 +4,7 @@ substitutions:
   comment: "${friendly_name} (ESP32-CAM)"
   default_update_interval: 60s
 
-packages:
-  board: !include boards/esp32cam.yaml
+<<: !include boards/esp32cam.yaml
 <<: !include
   file: components/wifi.yaml
   vars:

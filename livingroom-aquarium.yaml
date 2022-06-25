@@ -4,8 +4,7 @@ substitutions:
   comment: "${friendly_name} (Gosund P1 Mod)"
   default_update_interval: 60s
 
-packages:
-  board: !include boards/esp8285.yaml
+<<: !include boards/esp8285.yaml
 <<: !include
   file: components/wifi.yaml
   vars:

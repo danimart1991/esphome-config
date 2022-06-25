@@ -4,8 +4,7 @@ substitutions:
   comment: "${friendly_name} (Sonoff Basic R2 Dry Contact Mod)"
   default_update_interval: 60s
 
-packages:
-  board: !include boards/esp01_1m.yaml
+<<: !include boards/esp01_1m.yaml
 <<: !include
   file: components/wifi.yaml
   vars:

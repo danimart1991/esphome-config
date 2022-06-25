@@ -4,8 +4,7 @@ substitutions:
   comment: "${friendly_name} (NodeMCU ESP8266)"
   default_update_interval: 60s
 
-packages:
-  board: !include boards/nodemcuv2.yaml
+<<: !include boards/nodemcuv2.yaml
 <<: !include
   file: components/wifi.yaml
   vars:

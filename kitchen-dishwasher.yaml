@@ -4,8 +4,7 @@ substitutions:
   comment: "${friendly_name} (Plug Blitzwolf SHP2 V2.3)"
   default_update_interval: 60s
 
-packages:
-  board: !include boards/esp8285.yaml
+<<: !include boards/esp8285.yaml
 <<: !include
   file: components/wifi.yaml
   vars:
