@@ -2,13 +2,14 @@ substitutions:
   device_name: kidsbedroom-hub
   friendly_name: "Kids Bedroom - Hub"
   comment: "${friendly_name} (NodeMCU ESP8266)"
-  wifi_manual_ip_static_ip: !secret kidsbedroom-hub_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:
   board: !include boards/nodemcuv2.yaml
-  wifi: !include components/wifi.yaml
-
+<<: !include
+  file: components/wifi.yaml
+  vars:
+    manual_ip_static_ip: !secret kidsbedroom-hub_wifi_manual_ip_static_ip
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml

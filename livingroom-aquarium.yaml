@@ -2,14 +2,15 @@ substitutions:
   device_name: livingroom-aquarium
   friendly_name: "Living Room - Aquarium"
   comment: "${friendly_name} (Gosund P1 Mod)"
-  wifi_manual_ip_static_ip: !secret livingroom-aquarium_wifi_manual_ip_static_ip
   default_update_interval: 60s
 
 packages:
   board: !include boards/esp8285.yaml
   time: !include components/time.yaml
-  wifi: !include components/wifi.yaml
-
+<<: !include
+  file: components/wifi.yaml
+  vars:
+    manual_ip_static_ip: !secret livingroom-aquarium_wifi_manual_ip_static_ip
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/web_server.yaml
