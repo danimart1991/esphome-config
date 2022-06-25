@@ -6,7 +6,6 @@ substitutions:
 
 packages:
   board: !include boards/nodemcu-32s.yaml
-  time: !include components/time.yaml
 <<: !include
   file: components/wifi.yaml
   vars:
@@ -15,6 +14,7 @@ packages:
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
+<<: !include components/time.yaml
 
 #logger:
 #  baud_rate: 0
