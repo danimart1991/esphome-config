@@ -21,6 +21,171 @@ sensor:
   - !include sensors/core/wifi_signal.yaml
   - !include common/sensor/internal_temperature.yaml
 
+  # https://github.com/dolezsa/thermal_comfort/blob/master/custom_components/thermal_comfort/sensor.py
+
+  # https://esphome.io/cookbook/bme280_environment.html
+  - platform: template
+    id: "dew_point"
+    name: "${device_name}_dewpoint"
+    lambda: |-
+      return (243.5*(log(id(${device_name}_humidity).state/100)+((17.67*id(${device_name}_temperature).state)/
+      (243.5+id(${device_name}_temperature).state)))/(17.67-log(id(${device_name}_humidity).state/100)-
+      ((17.67*id(${device_name}_temperature).state)/(243.5+id(${device_name}_temperature).state))));
+    unit_of_measurement: °C
+    icon: "mdi:thermometer-water"
+
+  # http://wahiduddin.net/calc/density_algorithms.htm
+  - platform: template
+    name: "${device_name}_dewpoint2"
+    lambda: |-
+      float A0 = 373.15 / (273.15 + id(${device_name}_temperature).state);
+      float SUM = -7.90298 * (A0 - 1);
+      SUM += 5.02808 * log10(A0);
+      SUM += -1.3816e-7 * (pow(10, (11.344 * (1 - 1 / A0))) - 1);
+      SUM += 8.1328e-3 * (pow(10, (-3.49149 * (A0 - 1))) - 1);
+      SUM += log10(1013.246);
+      float VP = pow(10, SUM - 3) * id(${device_name}_humidity).state;
+      float Td = log(VP / 0.61078);
+      Td = (241.88 * Td) / (17.558 - Td);
+      return Td;
+    unit_of_measurement: °C
+    icon: "mdi:thermometer-water"
+
+  # https://esphome.io/cookbook/bme280_environment.html
+  - platform: template
+    name: "${device_name}_absolutehumidity"
+    lambda: |-
+      const float mw = 18.01534;    // molar mass of water g/mol
+      const float r = 8.31447215;   // Universal gas constant J/mol/K
+      return (6.112 * powf(2.718281828, (17.67 * id(${device_name}_temperature).state) /
+        (id(${device_name}_temperature).state + 243.5)) * id(${device_name}_humidity).state * mw) /
+        ((273.15 + id(${device_name}_temperature).state) * r); // in grams/m^3
+    accuracy_decimals: 2
+    update_interval: 15s
+    icon: "mdi:water"
+    unit_of_measurement: "g/m³"
+
+  # https://carnotcycle.wordpress.com/2012/08/04/how-to-convert-relative-humidity-to-absolute-humidity/
+  - platform: template
+    name: "${device_name}_absolutehumidity2"
+    lambda: |-
+      float abs_temperature = id(${device_name}_temperature).state + 273.15;
+      float abs_humidity = 6.112;
+      abs_humidity *= exp((17.67 * id(${device_name}_temperature).state) / (243.5 + id(${device_name}_temperature).state));
+      abs_humidity *= id(${device_name}_humidity).state;
+      abs_humidity *= 2.1674;
+      abs_humidity /= abs_temperature;
+      return abs_humidity;
+    accuracy_decimals: 2
+    update_interval: 15s
+    icon: "mdi:water"
+    unit_of_measurement: "g/m³"
+
+  # Heat Index: http://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml
+  - platform: template
+    name: "${device_name}_heatindex"
+    accuracy_decimals: 2
+    unit_of_measurement: "°C"
+    icon: "mdi:sun-thermometer"
+    lambda: |-
+      float hi;
+      float const f_temperature = (id(${device_name}_temperature).state * 1.80) + 32;
+      float const p_humidity = id(${device_name}_humidity).state;
+
+      if (f_temperature <= 39.9) {
+        hi = f_temperature;
+      } else {
+        hi = 0.5 * (f_temperature + 61.0 + ((f_temperature - 68.0) * 1.2) + (p_humidity * 0.094));
+
+        if (hi > 79) {
+          hi = -42.379 +
+               (2.04901523 * f_temperature) + 
+               (10.14333127 * p_humidity) -
+               (0.22475541 * f_temperature * p_humidity) -
+               (0.00683783 * pow(f_temperature, 2)) -
+               (0.05481717 * pow(p_humidity, 2)) +
+               (0.00122874 * pow(f_temperature, 2) * p_humidity) +
+               (0.00085282 * f_temperature * pow(p_humidity, 2)) -
+               (0.00000199 * pow(f_temperature, 2) * pow(p_humidity, 2));
+
+          if ((p_humidity <= 13) && (f_temperature >= 80.0) && (f_temperature <= 112.0))
+            hi -= ((13.0 - p_humidity) * 0.25) * sqrt((17.0 - abs(f_temperature - 95.0)) * 0.05882);
+
+          else if ((p_humidity > 85.0) && (f_temperature >= 80.0) && (f_temperature <= 87.0))
+            hi += ((p_humidity - 85.0) * 0.1) * ((87.0 - f_temperature) * 0.2);
+        }
+      }
+
+      return (hi - 32) * 0.556;
+
+  # Heat Index: https://en.wikipedia.org/wiki/Heat_index#Formula
+  - platform: template
+    name: "${device_name}_heatindex2"
+    accuracy_decimals: 2
+    unit_of_measurement: "°C"
+    icon: "mdi:sun-thermometer"
+    lambda: |-
+      float hi;
+      float const f_temperature = id(${device_name}_temperature).state;
+      float const p_humidity = id(${device_name}_humidity).state;
+
+      if (f_temperature <= 4.44) {
+        hi = f_temperature;
+      } else {
+        hi = 0.5 * (f_temperature + 61.0 + ((f_temperature - 68.0) * 1.2) + (p_humidity * 0.094));
+
+        if (hi > 79) {
+          hi = -8.78469475556 +
+               (1.61139411 * f_temperature) + 
+               (2.33854883889 * p_humidity) -
+               (0.14611605 * f_temperature * p_humidity) -
+               (0.012308094 * pow(f_temperature, 2)) -
+               (0.0164248277778 * pow(p_humidity, 2)) +
+               (0.002211732 * pow(f_temperature, 2) * p_humidity) +
+               (0.00072546 * f_temperature * pow(p_humidity, 2)) -
+               (0.000003582 * pow(f_temperature, 2) * pow(p_humidity, 2));
+
+          if ((p_humidity <= 13) && (f_temperature >= 26.66) && (f_temperature <= 44.4))
+            hi -= ((13.0 - p_humidity) * 0.25) * sqrt((17.0 - abs(f_temperature - 95.0)) * 0.05882);
+
+          else if ((p_humidity > 85.0) && (f_temperature >= 26.66) && (f_temperature <= 30.5))
+            hi += ((p_humidity - 85.0) * 0.1) * ((87.0 - f_temperature) * 0.2);
+        }
+      }
+
+      return hi;
+
+  # Frost Point: https://pon.fr/dzvents-alerte-givre-et-calcul-humidite-absolue/
+  - platform: template
+    name: "${device_name}_frostpoint"
+    accuracy_decimals: 2
+    unit_of_measurement: "°C"
+    icon: "mdi:snowflake-thermometer"
+    lambda: |-
+      float const dew_temp = id(dew_point).state + 273.15;
+      float const temp = id(${device_name}_temperature).state + 273.15;
+
+      return (dew_temp + (2671.02 / ((2954.61 / temp + 2.193665 * log(temp) - 13.3448)) - temp)) - 273.15;
+
+  # Simmer Index: https://www.vcalc.com/wiki/rklarsen/Summer+Simmer+Index
+  - platform: template
+    name: "${device_name}_simmerindex"
+    accuracy_decimals: 2
+    unit_of_measurement: "°C"
+    icon: "mdi:thermometer-alert"
+    lambda: |-
+      float const f_temperature = (id(${device_name}_temperature).state * 1.80) + 32;
+      float const p_humidity = id(${device_name}_humidity).state;
+      float si;
+
+      if (f_temperature < 70) {
+        si = f_temperature;
+      } else {
+        si = 1.98 * (f_temperature - (0.55 - (0.0055 * p_humidity)) * (f_temperature - 58.0)) - 56.83;
+      }
+
+      return (si - 32) * 0.556;
+
 binary_sensor:
   - !include common/binary_sensor/status.yaml
 
