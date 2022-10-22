@@ -1,6 +1,6 @@
 substitutions:
-  device_name: test-esp32
-  friendly_name: "Test - ESP32"
+  device_name: "groundfloorhallway-energymeter"
+  friendly_name: "Ground Floor Hallway - Energy Meter"
   comment: "${friendly_name} (NodeMCU ESP32S)"
   default_update_interval: 60s
 
@@ -8,37 +8,35 @@ substitutions:
 <<: !include
   file: components/wifi.yaml
   vars:
-    manual_ip_static_ip: !secret test-esp32_wifi_manual_ip_static_ip
+    manual_ip_static_ip: !secret groundfloorhallway-energymeter_wifi_manual_ip_static_ip
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
 <<: !include components/time.yaml
 
-#logger:
-#  baud_rate: 0
-
 uart:
   rx_pin: GPIO16
   tx_pin: GPIO17
   baud_rate: 9600
-  stop_bits: 2
+  #stop_bits: 2
 
 sensor:
   - platform: pzemac
+    id: pzemac_01
     current:
-      name: "PZEM-004T V3 - Current"
+      name: "${friendly_name} - Current"
     voltage:
-      name: "PZEM-004T V3 - Voltage"
+      name: "${friendly_name} - Voltage"
     energy:
-      name: "PZEM-004T V3 - Energy"
+      name: "${friendly_name} - Energy"
     power:
       id: power_id
-      name: "PZEM-004T V3 - Power"
+      name: "${friendly_name} - Power"
     frequency:
-      name: "PZEM-004T V3 - Frequency"
+      name: "${friendly_name} - Frequency"
     power_factor:
-      name: "PZEM-004T V3 - Power Factor"
+      name: "${friendly_name} - Power Factor"
     update_interval: 1s
   - <<: !include sensors/electricity/total_daily_energy.yaml
     power_id: power_id
@@ -46,6 +44,14 @@ sensor:
 
 binary_sensor:
   - !include common/binary_sensor/status.yaml
+
+button:
+  - platform: template
+    name: "${friendly_name} - Reset Energy"
+    icon: "mdi:restart"
+    on_press:
+      then:
+        - pzemac.reset_energy: pzemac_01
 
 status_led:
   pin: GPIO2
