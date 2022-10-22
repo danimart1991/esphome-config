@@ -16,3 +16,6 @@ wifi:
     static_ip: ${manual_ip_static_ip}
     subnet: !secret base_wifi_manual_ip_subnet
     gateway: !secret base_wifi_manual_ip_gateway
+  ap:
+    ssid: "${device_name}"
+    password: !secret base_wifi_ap_password
