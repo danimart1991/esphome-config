@@ -1,6 +1,6 @@
 substitutions:
-  device_name: home-heater
-  friendly_name: "Home - Heater"
+  device_name: "utility-waterheater"
+  friendly_name: "Utility - Water Heater"
   comment: "${friendly_name} (Sonoff Basic R2 Dry Contact Mod)"
   default_update_interval: 60s
 
@@ -8,7 +8,7 @@ substitutions:
 <<: !include
   file: components/wifi.yaml
   vars:
-    manual_ip_static_ip: !secret home-heater_wifi_manual_ip_static_ip
+    manual_ip_static_ip: !secret utility-waterheater_wifi_manual_ip_static_ip
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
