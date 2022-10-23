@@ -30,7 +30,7 @@ binary_sensor:
 switch:
   - platform: gpio
     id: switch_id
-    name: ${friendly_name} - Switch
+    name: ${device_name}_switch
     restore_mode: RESTORE_DEFAULT_OFF
     pin: GPIO15
     on_turn_on:
@@ -53,20 +53,20 @@ sensor:
     cf_pin: GPIO05
     cf1_pin: GPIO14
     current:
-      name: ${friendly_name} - Current
+      name: ${device_name}_current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
         - multiply: 0.713100
     voltage:
-      name: ${friendly_name} - Voltage
+      name: ${device_name}_voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
         - multiply: 0.404015
     power:
       id: power_id
-      name: ${friendly_name} - Power
+      name: ${device_name}_power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:

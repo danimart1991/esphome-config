@@ -38,4 +38,4 @@ switch:
   - platform: gpio
     pin: GPIO12
     id: switch_id
-    name: ${friendly_name} Switch
+    name: ${device_name}_switch

@@ -25,18 +25,18 @@ sensor:
   - platform: pzemac
     id: pzemac_01
     current:
-      name: "${friendly_name} - Current"
+      name: "${device_name}_current"
     voltage:
-      name: "${friendly_name} - Voltage"
+      name: "${device_name}_voltage"
     energy:
-      name: "${friendly_name} - Energy"
+      name: "${device_name}_energy"
     power:
       id: power_id
-      name: "${friendly_name} - Power"
+      name: "${device_name}_power"
     frequency:
-      name: "${friendly_name} - Frequency"
+      name: "${device_name}_frequency"
     power_factor:
-      name: "${friendly_name} - Power Factor"
+      name: "${device_name}_powerfactor"
     update_interval: 1s
   - <<: !include sensors/electricity/total_daily_energy.yaml
     power_id: power_id
@@ -47,7 +47,7 @@ binary_sensor:
 
 button:
   - platform: template
-    name: "${friendly_name} - Reset Energy"
+    name: "${device_name}_resetenergy"
     icon: "mdi:restart"
     on_press:
       then:

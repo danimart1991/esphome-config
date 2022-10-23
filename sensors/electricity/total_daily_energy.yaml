@@ -8,7 +8,7 @@
 #
 
 platform: total_daily_energy
-name: "${friendly_name} - Total Daily Energy"
+name: "${device_name}_totaldailyenergy"
 device_class: energy
 unit_of_measurement: "kWh"
 filters:

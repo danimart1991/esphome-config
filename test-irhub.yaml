@@ -49,7 +49,7 @@ switch:
       - switch.turn_on: restart_id
   - platform: restart
     id: restart_id
-    name: ${friendly_name} - Restart
+    name: ${device_name}_restart
 
 output:
   - platform: esp8266_pwm

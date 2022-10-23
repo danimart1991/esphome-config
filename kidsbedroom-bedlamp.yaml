@@ -46,11 +46,11 @@ light:
     num_leds: 3
     rgb_order: GRB
     id: light_id
-    name: ${friendly_name} Light
+    name: ${device_name}_light
 
 switch:
   - platform: template
-    name: ${friendly_name} - AutoSwitch
+    name: ${device_name}_autoswitch
     id: autoswitch_id
     optimistic: True
     restore_state: True
@@ -60,8 +60,8 @@ status_led:
 
 text_sensor:
   - platform: sun
-    name: ${friendly_name} - NextTurnOff
+    name: ${device_name}_nextturnoff
     type: sunrise
   - platform: sun
-    name: ${friendly_name} - NextTurnOn
+    name: ${device_name}_nextturnon
     type: sunset

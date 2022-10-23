@@ -59,25 +59,25 @@ switch:
   - platform: gpio
     pin: GPIO14
     id: switch_1_id
-    name: "${friendly_name} - Switch 1"
+    name: "${device_name}_switch01"
     restore_mode: RESTORE_DEFAULT_ON
     icon: mdi:power-socket-eu
   - platform: gpio
     pin: GPIO12
     id: switch_2_id
-    name: "${friendly_name} - Switch 2"
+    name: "${device_name}_switch02"
     restore_mode: RESTORE_DEFAULT_ON
     icon: mdi:power-socket-eu
   - platform: gpio
     pin: GPIO13
     id: switch_3_id
-    name: "${friendly_name} - Switch 3"
+    name: "${device_name}_switch03"
     restore_mode: RESTORE_DEFAULT_ON
     icon: mdi:power-socket-eu
   - platform: gpio
     pin: GPIO05
     id: switch_usb_id
-    name: "${friendly_name} - Switch USB"
+    name: "${device_name}_switchusb"
     restore_mode: RESTORE_DEFAULT_ON
     icon: mdi:power-socket-eu
     inverted: yes
@@ -93,26 +93,26 @@ dallas:
 sensor:
   - platform: dallas
     address: 0x9D3C01D607A18028
-    name: ${friendly_name} - Temperature
+    name: ${device_name}_temperature
     device_class: temperature
     filters:
       - offset: 2.0
   - platform: cse7766
     current:
-      name: ${friendly_name} - Current
+      name: ${device_name}_current
       icon: mdi:current-ac
       device_class: current
       filters:
         - multiply: 0.993793
     voltage:
-      name: ${friendly_name} - Voltage
+      name: ${device_name}_voltage
       icon: mdi:flash-circle
       device_class: voltage
       filters:
         - multiply: 2.410403
     power:
       id: power_id
-      name: ${friendly_name} - Power
+      name: ${device_name}_power
       icon: mdi:flash-outline
       device_class: power
       filters:
