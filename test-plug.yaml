@@ -31,7 +31,7 @@ switch:
   - platform: gpio
     id: switch_id
     name: ${device_name}_switch
-    restore_mode: RESTORE_DEFAULT_OFF
+    restore_mode: RESTORE_DEFAULT_ON
     pin: GPIO15
     on_turn_on:
       - switch.turn_on: led_id
@@ -40,7 +40,7 @@ switch:
   - platform: gpio
     id: led_id
     internal: True
-    restore_mode: RESTORE_DEFAULT_OFF
+    restore_mode: RESTORE_DEFAULT_ON
     pin:
       number: GPIO02
       inverted: True
