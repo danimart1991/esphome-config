@@ -1,10 +1,10 @@
 substitutions:
   device_name: "kitchen-dishwasherplug"
   friendly_name: "Kitchen - Dishwasher Plug"
-  comment: "${friendly_name} (Plug Blitzwolf SHP2 V2.3)"
+  comment: "${friendly_name} (Plug AWOW EU3S)"
   default_update_interval: 60s
 
-<<: !include boards/esp8285.yaml
+<<: !include boards/esp01_1m.yaml
 <<: !include
   file: components/wifi.yaml
   vars:
@@ -20,7 +20,7 @@ binary_sensor:
     id: button_id
     internal: True
     pin:
-      number: GPIO3
+      number: GPIO13
       mode: INPUT_PULLUP
       inverted: True
     on_press:
@@ -32,51 +32,45 @@ switch:
     id: switch_id
     name: ${device_name}_switch
     restore_mode: RESTORE_DEFAULT_OFF
-    pin: GPIO14
+    pin: GPIO15
     on_turn_on:
-      - switch.turn_on: blue_led_id
+      - switch.turn_on: led_id
     on_turn_off:
-      - switch.turn_off: blue_led_id
-
+      - switch.turn_off: led_id
   - platform: gpio
-    id: blue_led_id
+    id: led_id
     internal: True
     restore_mode: RESTORE_DEFAULT_OFF
     pin:
-      number: GPIO01
+      number: GPIO02
       inverted: True
-
-status_led:
-  pin:
-    number: GPIO13
-    inverted: True
 
 sensor:
   - platform: hlw8012
     sel_pin:
       number: GPIO12
       inverted: True
-    cf_pin: GPIO04
-    cf1_pin: GPIO05
+    cf_pin: GPIO05
+    cf1_pin: GPIO14
     current:
       name: ${device_name}_current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
-        - multiply: 0.829134
+        - multiply: 0.734901
     voltage:
       name: ${device_name}_voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
-        - multiply: 0.402105
+        - multiply: 0.411812
     power:
       id: power_id
       name: ${device_name}_power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:
-        - multiply: 0.177739
+        - multiply: 0.152388
     change_mode_every: 1
     update_interval: 10s
   - <<: !include sensors/electricity/total_daily_energy.yaml
