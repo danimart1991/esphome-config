@@ -1,3 +1,4 @@
 ---
 api:
-  password: !secret base_api_password
+  encryption:
+    key: !secret base_api_encryption_key
