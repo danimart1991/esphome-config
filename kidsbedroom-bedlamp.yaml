@@ -13,31 +13,12 @@ substitutions:
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
-<<: !include components/time.yaml
 
 binary_sensor:
   - !include common/binary_sensor/status.yaml
 
 sensor:
   - !include sensors/core/wifi_signal.yaml
-
-sun:
-  latitude: !secret sun_latitude
-  longitude: !secret sun_longitude
-  on_sunrise:
-    then:
-      if:
-        condition:
-          switch.is_on: autoswitch_id
-        then:
-          light.turn_off: light_id
-  on_sunset:
-    then:
-      if:
-        condition:
-          switch.is_on: autoswitch_id
-        then:
-          light.turn_on: light_id
 
 light:
   - platform: fastled_clockless
@@ -48,20 +29,5 @@ light:
     id: light_id
     name: ${device_name}_light
 
-switch:
-  - platform: template
-    name: ${device_name}_autoswitch
-    id: autoswitch_id
-    optimistic: True
-    restore_state: True
-
 status_led:
   pin: GPIO2
-
-text_sensor:
-  - platform: sun
-    name: ${device_name}_nextturnoff
-    type: sunrise
-  - platform: sun
-    name: ${device_name}_nextturnon
-    type: sunset
