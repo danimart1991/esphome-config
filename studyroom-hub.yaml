@@ -1,6 +1,6 @@
 substitutions:
-  device_name: kitchen-hub
-  friendly_name: "Kitchen - Hub"
+  device_name: studyroom-hub
+  friendly_name: "Study Room - Hub"
   comment: "${friendly_name} (NodeMCU ESP32S)"
   default_update_interval: 60s
 
@@ -8,7 +8,7 @@ substitutions:
 <<: !include
   file: components/wifi.yaml
   vars:
-    manual_ip_static_ip: !secret kitchen-hub_wifi_manual_ip_static_ip
+    manual_ip_static_ip: !secret studyroom-hub_wifi_manual_ip_static_ip
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
