@@ -1,6 +1,6 @@
 substitutions:
-  device_name: livingroom-aquarium
-  friendly_name: "Living Room - Aquarium"
+  device_name: dressingroom-desk
+  friendly_name: "Dressing Room - Desk"
   comment: "${friendly_name} (Gosund P1 Mod)"
   default_update_interval: 60s
 
@@ -8,7 +8,7 @@ substitutions:
 <<: !include
   file: components/wifi.yaml
   vars:
-    manual_ip_static_ip: !secret livingroom-aquarium_wifi_manual_ip_static_ip
+    manual_ip_static_ip: !secret dressingroom-desk_wifi_manual_ip_static_ip
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/web_server.yaml
