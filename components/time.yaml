@@ -5,7 +5,7 @@
 # platform, the native API connection to Home Assistant will be used to periodically synchronize
 # the current time.
 #
-# https://esphome.io/components/time.html#home-assistant-time-source
+# https://esphome.io/components/time#home-assistant-time-source
 #
 
 time:

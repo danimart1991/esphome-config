@@ -7,7 +7,7 @@
 # The sensor value is the "Received signal strength" measured in decibel-milliwatts (dBm).
 # These values are always negative and the closer they are to zero, the better the signal is.
 #
-# https://esphome.io/components/sensor/wifi_signal.html
+# https://esphome.io/components/sensor/wifi_signal
 #
 
 platform: wifi_signal

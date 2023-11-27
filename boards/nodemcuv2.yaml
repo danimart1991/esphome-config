@@ -1,7 +1,7 @@
 # NodeMCU 1.0 (ESP-12E Module) board. ESP8266 Development Module to build little projects.
 #
-# https://docs.platformio.org/en/latest/boards/espressif8266/nodemcuv2.html
-# http://www.ai-thinker.com/pro_view-67.html
+# https://docs.platformio.org/en/latest/boards/espressif8266/nodemcuv2
+# http://www.ai-thinker.com/pro_view-67
 # https://amzn.to/3B3cgpz
 #
 

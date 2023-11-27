@@ -1,6 +1,6 @@
 # Espressif Generic ESP8266 ESP-01 1M board. Used in some already manufactured devices.
 #
-# https://docs.platformio.org/en/latest/boards/espressif8266/esp01_1m.html
+# https://docs.platformio.org/en/latest/boards/espressif8266/esp01_1m
 #
 
 ---

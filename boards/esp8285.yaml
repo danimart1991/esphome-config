@@ -1,6 +1,6 @@
 # Generic ESP8285 board. Used in some already manufactured devices.
 #
-# https://docs.platformio.org/en/latest/boards/espressif8266/esp8285.html
+# https://docs.platformio.org/en/latest/boards/espressif8266/esp8285
 #
 
 ---

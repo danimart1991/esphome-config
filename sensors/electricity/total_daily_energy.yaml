@@ -4,7 +4,7 @@
 # The total_daily_energy sensor is a helper sensor that can use the energy value of other sensors
 # like the HLW8012, CSE7766, etc and integrate it over time.
 #
-# https://esphome.io/components/sensor/total_daily_energy.html
+# https://esphome.io/components/sensor/total_daily_energy
 #
 
 platform: total_daily_energy
