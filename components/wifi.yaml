@@ -18,3 +18,5 @@ wifi:
   ap:
     ssid: "${device_name}"
     password: !secret base_wifi_ap_password
+
+captive_portal:
