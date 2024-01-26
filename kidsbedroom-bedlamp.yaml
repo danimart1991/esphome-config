@@ -21,10 +21,11 @@ sensor:
   - !include sensors/core/wifi_signal.yaml
 
 light:
-  - platform: fastled_clockless
-    chipset: WS2812B
+  - platform: esp32_rmt_led_strip
+    chipset: ws2812
     pin: GPIO23
     num_leds: 3
+    rmt_channel: 0
     rgb_order: GRB
     id: light_id
     name: ${device_name}_light
