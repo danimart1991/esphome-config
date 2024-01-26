@@ -5,10 +5,7 @@ substitutions:
   default_update_interval: 60s
 
 <<: !include boards/nodemcu-32s.yaml
-<<: !include
-  file: components/wifi.yaml
-  vars:
-    manual_ip_static_ip: !secret livingroom-hub_wifi_manual_ip_static_ip
+<<: !include components/wifi.yaml
 <<: !include components/bluetooth_proxy.yaml
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
