@@ -3,6 +3,7 @@ substitutions:
   friendly_name: "Dressing Room - Desk"
   comment: "${friendly_name} (Gosund P1 Mod)"
   default_update_interval: 60s
+  powermeter_update_interval: 10s
 
 <<: !include boards/esp8285.yaml
 <<: !include components/wifi.yaml
@@ -100,12 +101,14 @@ sensor:
       icon: mdi:current-ac
       device_class: current
       filters:
+        - throttle_average: ${powermeter_update_interval}
         - multiply: 0.993793
     voltage:
       name: ${device_name}_voltage
       icon: mdi:flash-circle
       device_class: voltage
       filters:
+        - throttle_average: ${powermeter_update_interval}
         - multiply: 2.410403
     power:
       id: power_id
@@ -113,8 +116,20 @@ sensor:
       icon: mdi:flash-outline
       device_class: power
       filters:
+        - throttle_average: ${powermeter_update_interval}
         - multiply: 2.438610
-    update_interval: 10s
+    energy:
+      name: ${device_name}_energy
+      filters:
+        - throttle: ${powermeter_update_interval}
+    apparent_power:
+      name: ${device_name}_apparentpower
+      filters:
+        - throttle_average: ${powermeter_update_interval}
+    power_factor:
+      name: ${device_name}_powerfactor
+      filters:
+        - throttle_average: ${powermeter_update_interval}
   - <<: !include sensors/electricity/total_daily_energy.yaml
     power_id: power_id
   - platform: adc
