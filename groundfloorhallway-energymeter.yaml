@@ -6,6 +6,7 @@ substitutions:
 
 <<: !include boards/nodemcu-32s.yaml
 <<: !include components/wifi.yaml
+<<: !include components/bluetooth_proxy.yaml
 <<: !include common/api.yaml
 <<: !include common/ota.yaml
 <<: !include common/logger.yaml
