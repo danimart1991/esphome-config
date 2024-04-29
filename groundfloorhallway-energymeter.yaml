@@ -39,6 +39,7 @@ sensor:
   - <<: !include sensors/electricity/total_daily_energy.yaml
     power_id: power_id
   - !include sensors/core/wifi_signal.yaml
+  - !include common/sensor/internal_temperature.yaml
 
 binary_sensor:
   - !include common/binary_sensor/status.yaml

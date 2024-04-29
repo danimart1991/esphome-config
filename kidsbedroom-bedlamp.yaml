@@ -16,6 +16,7 @@ binary_sensor:
 
 sensor:
   - !include sensors/core/wifi_signal.yaml
+  - !include common/sensor/internal_temperature.yaml
 
 light:
   - platform: esp32_rmt_led_strip

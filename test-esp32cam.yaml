@@ -18,6 +18,7 @@ i2c:
 sensor:
   - !include common/sensor/bme280_i2c.yaml
   - !include sensors/core/wifi_signal.yaml
+  - !include common/sensor/internal_temperature.yaml
 
 binary_sensor:
   - !include common/binary_sensor/status.yaml
