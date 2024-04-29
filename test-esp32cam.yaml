@@ -16,7 +16,7 @@ i2c:
     scl: GPIO14
 
 sensor:
-  - !include common/sensor/bme280.yaml
+  - !include common/sensor/bme280_i2c.yaml
   - !include sensors/core/wifi_signal.yaml
 
 binary_sensor:

@@ -1,5 +1,5 @@
 ---
-platform: bme280
+platform: bme280_i2c
 update_interval: ${default_update_interval}
 temperature:
   name: ${device_name}_temperature
