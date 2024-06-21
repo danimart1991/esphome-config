@@ -6,8 +6,9 @@ substitutions:
 
 <<: !include boards/esp01_1m.yaml
 <<: !include components/wifi.yaml
+<<: !include components/ota.yaml
+<<: !include components/safe_mode.yaml
 <<: !include common/api.yaml
-<<: !include common/ota.yaml
 <<: !include common/logger.yaml
 <<: !include common/web_server.yaml
 

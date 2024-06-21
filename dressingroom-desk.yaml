@@ -7,8 +7,9 @@ substitutions:
 
 <<: !include boards/esp8285.yaml
 <<: !include components/wifi.yaml
+<<: !include components/ota.yaml
+<<: !include components/safe_mode.yaml
 <<: !include common/api.yaml
-<<: !include common/ota.yaml
 <<: !include common/web_server.yaml
 <<: !include components/time.yaml
 
@@ -85,11 +86,12 @@ uart:
   #tx_pin: GPIO01
   baud_rate: 4800
 
-dallas:
-  - pin: GPIO04
+one_wire:
+  - platform: gpio
+    pin: GPIO04
 
 sensor:
-  - platform: dallas
+  - platform: dallas_temp
     address: 0x9D3C01D607A18028
     name: ${device_name}_temperature
     device_class: temperature
