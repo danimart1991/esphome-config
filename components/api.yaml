@@ -1,0 +1,13 @@
+#
+# Native API Component
+#
+# The ESPHome native API is used to communicate with clients directly, with a
+# highly-optimized network protocol. Currently, only the ESPHome tool, Home
+# Assistant and ioBroker use this native API.
+#
+# https://esphome.io/components/api
+
+---
+api:
+  encryption:
+    key: !secret base_api_encryption_key

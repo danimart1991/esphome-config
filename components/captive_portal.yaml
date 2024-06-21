@@ -1,0 +1,11 @@
+#
+# Captive Portal
+#
+# The captive portal component in ESPHome is a fallback mechanism for when
+# connecting to the configured WiFi fails.
+#
+# https://esphome.io/components/captive_portal
+#
+
+---
+captive_portal:

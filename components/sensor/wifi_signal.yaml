@@ -1,4 +1,4 @@
----
+#
 # WiFi Signal Sensor
 #
 # The wifi_signal sensor platform allows you to read the signal strength of the currently
@@ -10,6 +10,7 @@
 # https://esphome.io/components/sensor/wifi_signal
 #
 
+---
 platform: wifi_signal
 name: "${device_name}_wifisignal"
 update_interval: ${default_update_interval}

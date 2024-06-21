@@ -5,18 +5,20 @@ substitutions:
   default_update_interval: 60s
 
 esphome:
+  <<: !include components/esphome.yaml
   on_boot:
     priority: 100 # Highest priority, ensures light turns on without delay.
     then:
       - light.turn_on: light_id
 
 <<: !include boards/esp01_1m.yaml
-<<: !include components/wifi.yaml
-<<: !include components/ota.yaml
+<<: !include components/api.yaml
+<<: !include components/captive_portal.yaml
+<<: !include components/logger.yaml
+<<: !include components/ota/esphome.yaml
 <<: !include components/safe_mode.yaml
-<<: !include common/api.yaml
-<<: !include common/logger.yaml
-<<: !include common/web_server.yaml
+<<: !include components/web_server.yaml
+<<: !include components/wifi.yaml
 
 remote_transmitter:
   pin: GPIO14
@@ -32,10 +34,10 @@ remote_receiver:
 #        code: !lambda return x;
 
 binary_sensor:
-  - !include common/binary_sensor/status.yaml
+  - <<: !include components/binary_sensor/status.yaml
 
 sensor:
-  - !include sensors/core/wifi_signal.yaml
+  - <<: !include components/sensor/wifi_signal.yaml
 
 switch:
   - platform: gpio

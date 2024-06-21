@@ -1,4 +1,9 @@
+#
 # ESPHome Core Configuration
+#
+# Here you specify some core information that ESPHome needs to create
+# firmwares. Most importantly, this is the section of the configuration where
+# you specify the name of the node.
 #
 # https://esphome.io/components/esphome
 #

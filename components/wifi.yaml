@@ -1,4 +1,4 @@
----
+#
 # Wi-Fi Component
 #
 # This core ESPHome component sets up WiFi connections to access points for you. It needs to be in
@@ -7,6 +7,7 @@
 # https://esphome.io/components/wifi
 #
 
+---
 wifi:
   ssid: !secret base_wifi_ssid
   password: !secret base_wifi_password
@@ -14,5 +15,3 @@ wifi:
   ap:
     ssid: "${device_name}"
     password: !secret base_wifi_ap_password
-
-captive_portal:

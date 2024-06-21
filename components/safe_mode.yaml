@@ -1,5 +1,5 @@
----
-# Safe Mode Component
+#
+# Safe Mode
 #
 # Sometimes hardware and/or software doesn’t behave as expected. ESPHome supports a “safe mode”
 # to help recover from repeated boot failures/reboot loops. After a specified number
@@ -11,4 +11,5 @@
 # https://esphome.io/components/safe_mode
 #
 
+---
 safe_mode:

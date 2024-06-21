@@ -1,4 +1,0 @@
----
-api:
-  encryption:
-    key: !secret base_api_encryption_key

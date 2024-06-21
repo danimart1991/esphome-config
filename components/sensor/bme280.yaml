@@ -1,0 +1,25 @@
+#
+# BME280 Temperature+Pressure+Humidity Sensor
+#
+# The bme280 sensor platform allows you to use your BME280 (datasheet,
+# Adafruit) temperature, pressure and humidity sensors with ESPHome. The sensor
+# is used in Forced Mode where measurement is performed and then the sensor
+# returns to sleep mode until next measurement. The I²C or SPI is required to
+# be set up in your configuration for this sensor to work.
+#
+# https://esphome.io/components/sensor/bme280
+#
+
+---
+platform: bme280_i2c
+update_interval: ${default_update_interval}
+temperature:
+  name: ${device_name}_temperature
+  device_class: temperature
+pressure:
+  name: ${device_name}_pressure
+  device_class: pressure
+humidity:
+  name: ${device_name}_humidity
+  device_class: humidity
+address: 0x76

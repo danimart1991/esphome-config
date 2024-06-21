@@ -5,15 +5,17 @@ substitutions:
   default_update_interval: 60s
 
 <<: !include boards/esp8285.yaml
-<<: !include components/wifi.yaml
-<<: !include components/ota.yaml
+<<: !include components/api.yaml
+<<: !include components/captive_portal.yaml
+<<: !include components/logger.yaml
+<<: !include components/ota/esphome.yaml
 <<: !include components/safe_mode.yaml
-<<: !include common/api.yaml
-<<: !include common/logger.yaml
-<<: !include common/web_server.yaml
-<<: !include components/time.yaml
+<<: !include components/time/homeassistant.yaml
+<<: !include components/web_server.yaml
+<<: !include components/wifi.yaml
 
 binary_sensor:
+  - <<: !include components/binary_sensor/status.yaml
   - platform: gpio
     id: button_id
     internal: True
@@ -23,7 +25,6 @@ binary_sensor:
       inverted: True
     on_press:
       - switch.toggle: switch_id
-  - !include common/binary_sensor/status.yaml
 
 switch:
   - platform: gpio
@@ -35,7 +36,6 @@ switch:
       - switch.turn_on: blue_led_id
     on_turn_off:
       - switch.turn_off: blue_led_id
-
   - platform: gpio
     id: blue_led_id
     internal: True
@@ -50,6 +50,9 @@ status_led:
     inverted: True
 
 sensor:
+  - <<: !include components/sensor/wifi_signal.yaml
+  - <<: !include components/sensor/total_daily_energy.yaml
+    power_id: power_id
   - platform: hlw8012
     sel_pin:
       number: GPIO12
@@ -77,6 +80,3 @@ sensor:
         - multiply: 0.177739
     change_mode_every: 1
     update_interval: 10s
-  - <<: !include sensors/electricity/total_daily_energy.yaml
-    power_id: power_id
-  - !include sensors/core/wifi_signal.yaml

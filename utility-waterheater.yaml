@@ -5,14 +5,16 @@ substitutions:
   default_update_interval: 60s
 
 <<: !include boards/esp01_1m.yaml
-<<: !include components/wifi.yaml
-<<: !include components/ota.yaml
+<<: !include components/api.yaml
+<<: !include components/captive_portal.yaml
+<<: !include components/logger.yaml
+<<: !include components/ota/esphome.yaml
 <<: !include components/safe_mode.yaml
-<<: !include common/api.yaml
-<<: !include common/logger.yaml
-<<: !include common/web_server.yaml
+<<: !include components/web_server.yaml
+<<: !include components/wifi.yaml
 
 binary_sensor:
+  - <<: !include components/binary_sensor/status.yaml
   - platform: gpio
     pin:
       number: GPIO0
@@ -22,10 +24,9 @@ binary_sensor:
     internal: True
     on_press:
       - switch.toggle: switch_id
-  - !include common/binary_sensor/status.yaml
 
 sensor:
-  - !include sensors/core/wifi_signal.yaml
+  - <<: !include components/sensor/wifi_signal.yaml
 
 status_led:
   pin:

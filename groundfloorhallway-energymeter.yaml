@@ -5,14 +5,15 @@ substitutions:
   default_update_interval: 60s
 
 <<: !include boards/nodemcu-32s.yaml
-<<: !include components/wifi.yaml
+<<: !include components/api.yaml
 <<: !include components/bluetooth_proxy.yaml
-<<: !include components/ota.yaml
+<<: !include components/captive_portal.yaml
+<<: !include components/logger.yaml
+<<: !include components/ota/esphome.yaml
 <<: !include components/safe_mode.yaml
-<<: !include common/api.yaml
-<<: !include common/logger.yaml
-<<: !include common/web_server.yaml
-<<: !include components/time.yaml
+<<: !include components/time/homeassistant.yaml
+<<: !include components/web_server.yaml
+<<: !include components/wifi.yaml
 
 uart:
   rx_pin: GPIO16
@@ -21,6 +22,10 @@ uart:
   #stop_bits: 2
 
 sensor:
+  - <<: !include components/sensor/internal_temperature.yaml
+  - <<: !include components/sensor/wifi_signal.yaml
+  - <<: !include components/sensor/total_daily_energy.yaml
+    power_id: power_id
   - platform: pzemac
     id: pzemac_01
     current:
@@ -37,13 +42,9 @@ sensor:
     power_factor:
       name: "${device_name}_powerfactor"
     update_interval: 1s
-  - <<: !include sensors/electricity/total_daily_energy.yaml
-    power_id: power_id
-  - !include sensors/core/wifi_signal.yaml
-  - !include common/sensor/internal_temperature.yaml
 
 binary_sensor:
-  - !include common/binary_sensor/status.yaml
+  - <<: !include components/binary_sensor/status.yaml
 
 button:
   - platform: template

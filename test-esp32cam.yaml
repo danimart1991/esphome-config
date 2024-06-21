@@ -5,24 +5,25 @@ substitutions:
   default_update_interval: 60s
 
 <<: !include boards/esp32cam.yaml
-<<: !include components/wifi.yaml
-<<: !include components/ota.yaml
+<<: !include components/api.yaml
+<<: !include components/captive_portal.yaml
+<<: !include components/logger.yaml
+<<: !include components/ota/esphome.yaml
 <<: !include components/safe_mode.yaml
-<<: !include common/api.yaml
-<<: !include common/logger.yaml
-<<: !include common/web_server.yaml
+<<: !include components/web_server.yaml
+<<: !include components/wifi.yaml
 
 i2c:
   - sda: GPIO13
     scl: GPIO14
 
 sensor:
-  - !include common/sensor/bme280_i2c.yaml
-  - !include sensors/core/wifi_signal.yaml
-  - !include common/sensor/internal_temperature.yaml
+  - <<: !include components/sensor/bme280.yaml
+  - <<: !include components/sensor/internal_temperature.yaml
+  - <<: !include components/sensor/wifi_signal.yaml
 
 binary_sensor:
-  - !include common/binary_sensor/status.yaml
+  - <<: !include components/binary_sensor/status.yaml
 
 status_led:
   pin:

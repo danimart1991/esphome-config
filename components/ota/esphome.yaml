@@ -1,12 +1,13 @@
----
-# ESPHome OTA Updates Component
+#
+# ESPHome OTA Updates
 #
 # ESPHome’s Over-The-Air (OTA) platform allows you to remotely install modified/updated firmware
 # binaries onto your ESPHome devices over their network (Wi-Fi or Ethernet) interface.
 #
-# https://esphome.io/components/ota
+# https://esphome.io/components/ota/esphome
 #
 
+---
 ota:
   - platform: esphome
     password: !secret base_ota_password

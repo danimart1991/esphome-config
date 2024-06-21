@@ -6,12 +6,18 @@ substitutions:
   powermeter_update_interval: 10s
 
 <<: !include boards/esp8285.yaml
-<<: !include components/wifi.yaml
-<<: !include components/ota.yaml
+<<: !include components/api.yaml
+<<: !include components/captive_portal.yaml
+<<: !include components/ota/esphome.yaml
 <<: !include components/safe_mode.yaml
-<<: !include common/api.yaml
-<<: !include common/web_server.yaml
-<<: !include components/time.yaml
+<<: !include components/time/homeassistant.yaml
+<<: !include components/web_server.yaml
+<<: !include components/wifi.yaml
+
+text_sensor:
+  - platform: version
+    name: "${device_name}_version"
+    hide_timestamp: true
 
 logger:
   baud_rate: 0
@@ -24,7 +30,7 @@ status_led:
     inverted: True
 
 binary_sensor:
-  - !include common/binary_sensor/status.yaml
+  - <<: !include components/binary_sensor/status.yaml
   - platform: gpio
     id: button_main_id
     internal: True
@@ -91,6 +97,9 @@ one_wire:
     pin: GPIO04
 
 sensor:
+  - <<: !include components/sensor/wifi_signal.yaml
+  - <<: !include components/sensor/total_daily_energy.yaml
+    power_id: power_id
   - platform: dallas_temp
     address: 0x9D3C01D607A18028
     name: ${device_name}_temperature
@@ -132,8 +141,6 @@ sensor:
       name: ${device_name}_powerfactor
       filters:
         - throttle_average: ${powermeter_update_interval}
-  - <<: !include sensors/electricity/total_daily_energy.yaml
-    power_id: power_id
   - platform: adc
     pin: GPIO17
     id: gpio17
@@ -154,4 +161,3 @@ sensor:
             id(button_3_id).publish_state(false);
           }
           return{};
-  - !include sensors/core/wifi_signal.yaml

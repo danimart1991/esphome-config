@@ -1,4 +1,4 @@
----
+#
 # Total Daily Energy Sensor
 #
 # The total_daily_energy sensor is a helper sensor that can use the energy value of other sensors
@@ -7,6 +7,7 @@
 # https://esphome.io/components/sensor/total_daily_energy
 #
 
+---
 platform: total_daily_energy
 name: "${device_name}_totaldailyenergy"
 device_class: energy
