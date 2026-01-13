@@ -27,4 +27,6 @@ binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
 
 status_led:
-  pin: GPIO2
+  pin:
+    number: GPIO2
+    ignore_strapping_warning: true

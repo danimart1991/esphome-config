@@ -8,9 +8,9 @@ esphome:
   <<: !include components/esphome.yaml
 
 esp32:
-  board: esp32doit-devkit-v1
+  board: wt32-eth01
   framework:
-    type: arduino
+    type: esp-idf
 
 <<: !include components/ota/esphome.yaml
 <<: !include components/safe_mode.yaml
@@ -22,7 +22,9 @@ ethernet:
   type: LAN8720
   mdc_pin: GPIO23
   mdio_pin: GPIO18
-  clk_mode: GPIO0_IN
+  clk:
+    pin: GPIO0
+    mode: CLK_EXT_IN
   phy_addr: 1
   power_pin: GPIO16
 

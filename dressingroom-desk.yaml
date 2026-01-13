@@ -14,11 +14,6 @@ substitutions:
 <<: !include components/web_server.yaml
 <<: !include components/wifi.yaml
 
-text_sensor:
-  - platform: version
-    name: "${device_name}_version"
-    hide_timestamp: true
-
 logger:
   baud_rate: 0
   logs:
@@ -34,8 +29,8 @@ binary_sensor:
   - platform: gpio
     id: button_main_id
     internal: True
-    pin:
-      number: GPIO16
+    pin: GPIO16
+    use_interrupt: false
     on_press:
       - switch.toggle: switch_usb_id
   - platform: template
@@ -91,6 +86,7 @@ uart:
   rx_pin: GPIO03
   #tx_pin: GPIO01
   baud_rate: 4800
+  parity: EVEN
 
 one_wire:
   - platform: gpio

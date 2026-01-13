@@ -25,10 +25,11 @@ light:
     chipset: ws2812
     pin: GPIO23
     num_leds: 3
-    rmt_channel: 0
     rgb_order: GRB
     id: light_id
     name: ${device_name}_light
 
 status_led:
-  pin: GPIO2
+  pin:
+    number: GPIO2
+    ignore_strapping_warning: true
