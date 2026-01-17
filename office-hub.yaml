@@ -1,7 +1,6 @@
 substitutions:
-  device_name: office-hub
-  friendly_name: "Office - Hub"
-  comment: "${friendly_name} (NodeMCU ESP32S)"
+  name: office-hub
+  comment: "Office - Hub (NodeMCU ESP32S)"
   default_update_interval: 60s
 
 <<: !include boards/nodemcu-32s.yaml

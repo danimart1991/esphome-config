@@ -14,12 +14,12 @@
 platform: bme280_i2c
 update_interval: ${default_update_interval}
 temperature:
-  name: ${device_name}_temperature
+  name: ${name}_temperature
   device_class: temperature
 pressure:
-  name: ${device_name}_pressure
+  name: ${name}_pressure
   device_class: pressure
 humidity:
-  name: ${device_name}_humidity
+  name: ${name}_humidity
   device_class: humidity
 address: 0x76

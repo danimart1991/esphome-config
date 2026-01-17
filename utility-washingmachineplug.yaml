@@ -1,7 +1,6 @@
 substitutions:
-  device_name: "utility-washingmachineplug"
-  friendly_name: "Utility - Washing Machine Plug"
-  comment: "${friendly_name} (Plug AWOW EU3S)"
+  name: "utility-washingmachineplug"
+  comment: "Utility - Washing Machine Plug (Plug AWOW EU3S)"
   default_update_interval: 60s
 
 <<: !include boards/esp01_1m.yaml
@@ -29,7 +28,7 @@ binary_sensor:
 switch:
   - platform: gpio
     id: switch_id
-    name: ${device_name}_switch
+    name: ${name}_switch
     restore_mode: RESTORE_DEFAULT_ON
     pin: GPIO15
     on_turn_on:
@@ -56,20 +55,20 @@ sensor:
     cf_pin: GPIO05
     cf1_pin: GPIO14
     current:
-      name: ${device_name}_current
+      name: ${name}_current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
         - multiply: 0.746064
     voltage:
-      name: ${device_name}_voltage
+      name: ${name}_voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
         - multiply: 0.420251
     power:
       id: power_id
-      name: ${device_name}_power
+      name: ${name}_power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:

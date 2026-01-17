@@ -1,7 +1,6 @@
 substitutions:
-  device_name: test-wt32
-  friendly_name: Test - WT32
-  comment: "${friendly_name} (WT32)"
+  name: test-wt32
+  comment: "Test - WT32 (WT32)"
   default_update_interval: 60s
 
 esphome:

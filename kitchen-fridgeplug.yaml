@@ -1,7 +1,6 @@
 substitutions:
-  device_name: "kitchen-fridgeplug"
-  friendly_name: "Kitchen - Fridge Plug"
-  comment: "${friendly_name} (Plug Blitzwolf SHP2 V2.3)"
+  name: "kitchen-fridgeplug"
+  comment: "Kitchen - Fridge Plug (Plug Blitzwolf SHP2 V2.3)"
   default_update_interval: 60s
 
 <<: !include boards/esp8285.yaml
@@ -29,7 +28,7 @@ binary_sensor:
 switch:
   - platform: gpio
     id: switch_id
-    name: ${device_name}_switch
+    name: ${name}_switch
     restore_mode: RESTORE_DEFAULT_ON
     pin: GPIO14
     on_turn_on:
@@ -60,20 +59,20 @@ sensor:
     cf_pin: GPIO04
     cf1_pin: GPIO05
     current:
-      name: ${device_name}_current
+      name: ${name}_current
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
         - multiply: 0.829134
     voltage:
-      name: ${device_name}_voltage
+      name: ${name}_voltage
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
         - multiply: 0.402105
     power:
       id: power_id
-      name: ${device_name}_power
+      name: ${name}_power
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:

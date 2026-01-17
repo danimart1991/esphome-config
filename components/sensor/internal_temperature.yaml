@@ -9,5 +9,5 @@
 
 ---
 platform: internal_temperature
-name: ${device_name}_internaltemperature
+name: ${name}_internaltemperature
 update_interval: ${default_update_interval}

@@ -1,7 +1,6 @@
 substitutions:
-  device_name: test-irhub
-  friendly_name: Test - IR Hub
-  comment: "${friendly_name} (FK-UFO-R1)"
+  name: test-irhub
+  comment: "Test - IR Hub (FK-UFO-R1)"
   default_update_interval: 60s
 
 esphome:
@@ -49,7 +48,7 @@ switch:
       - switch.turn_on: restart_id
   - platform: restart
     id: restart_id
-    name: ${device_name}_restart
+    name: ${name}_restart
 
 output:
   - platform: esp8266_pwm

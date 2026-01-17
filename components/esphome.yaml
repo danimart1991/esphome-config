@@ -9,5 +9,5 @@
 #
 
 ---
-name: ${device_name}
+name: ${name}
 comment: ${comment}

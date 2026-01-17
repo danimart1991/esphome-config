@@ -1,7 +1,6 @@
 substitutions:
-  device_name: kidsbedroom-bedlamp
-  friendly_name: "Kids Bedroom - Bed Lamp"
-  comment: "${friendly_name} (NodeMCU ESP32S)"
+  name: kidsbedroom-bedlamp
+  comment: "Kids Bedroom - Bed Lamp (NodeMCU ESP32S)"
   default_update_interval: 60s
 
 <<: !include boards/nodemcu-32s.yaml
@@ -27,7 +26,7 @@ light:
     num_leds: 3
     rgb_order: GRB
     id: light_id
-    name: ${device_name}_light
+    name: ${name}_light
 
 status_led:
   pin:

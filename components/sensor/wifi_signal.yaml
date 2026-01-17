@@ -12,5 +12,5 @@
 
 ---
 platform: wifi_signal
-name: "${device_name}_wifisignal"
+name: "${name}_wifisignal"
 update_interval: ${default_update_interval}

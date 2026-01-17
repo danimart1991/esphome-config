@@ -1,7 +1,6 @@
 substitutions:
-  device_name: "groundfloorhallway-energymeter"
-  friendly_name: "Ground Floor Hallway - Energy Meter"
-  comment: "${friendly_name} (NodeMCU ESP32S)"
+  name: "groundfloorhallway-energymeter"
+  comment: "Ground Floor Hallway - Energy Meter (NodeMCU ESP32S)"
   default_update_interval: 60s
 
 <<: !include boards/nodemcu-32s.yaml
@@ -29,18 +28,18 @@ sensor:
   - platform: pzemac
     id: pzemac_01
     current:
-      name: "${device_name}_current"
+      name: "${name}_current"
     voltage:
-      name: "${device_name}_voltage"
+      name: "${name}_voltage"
     energy:
-      name: "${device_name}_energy"
+      name: "${name}_energy"
     power:
       id: power_id
-      name: "${device_name}_power"
+      name: "${name}_power"
     frequency:
-      name: "${device_name}_frequency"
+      name: "${name}_frequency"
     power_factor:
-      name: "${device_name}_powerfactor"
+      name: "${name}_powerfactor"
     update_interval: 1s
 
 binary_sensor:
@@ -48,7 +47,7 @@ binary_sensor:
 
 button:
   - platform: template
-    name: "${device_name}_resetenergy"
+    name: "${name}_resetenergy"
     icon: "mdi:restart"
     on_press:
       then:

@@ -1,7 +1,6 @@
 substitutions:
-  device_name: kidsbedroom-hub
-  friendly_name: "Kids Bedroom - Hub"
-  comment: "${friendly_name} (NodeMCU ESP8266)"
+  name: kidsbedroom-hub
+  comment: "Kids Bedroom - Hub (NodeMCU ESP8266)"
   default_update_interval: 60s
 
 <<: !include boards/nodemcuv2.yaml

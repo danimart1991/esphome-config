@@ -1,7 +1,6 @@
 substitutions:
-  device_name: "utility-waterheater"
-  friendly_name: "Utility - Water Heater"
-  comment: "${friendly_name} (Sonoff Basic R2 Dry Contact Mod)"
+  name: "utility-waterheater"
+  comment: "Utility - Water Heater (Sonoff Basic R2 Dry Contact Mod)"
   default_update_interval: 60s
 
 <<: !include boards/esp01_1m.yaml
@@ -37,4 +36,4 @@ switch:
   - platform: gpio
     pin: GPIO12
     id: switch_id
-    name: ${device_name}_switch
+    name: ${name}_switch

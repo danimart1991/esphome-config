@@ -1,7 +1,6 @@
 substitutions:
-  device_name: studyroom-hub
-  friendly_name: "Study Room - Hub"
-  comment: "${friendly_name} (NodeMCU ESP32S)"
+  name: studyroom-hub
+  comment: "Study Room - Hub (NodeMCU ESP32S)"
   default_update_interval: 60s
 
 <<: !include boards/nodemcu-32s.yaml
