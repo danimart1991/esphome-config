@@ -13,6 +13,10 @@ substitutions:
 <<: !include components/web_server.yaml
 <<: !include components/wifi.yaml
 
+text_sensor:
+  - <<: !include components/text_sensor/version.yaml
+  - <<: !include components/text_sensor/wifi_info.yaml
+
 i2c:
   - sda: GPIO21
     scl: GPIO22

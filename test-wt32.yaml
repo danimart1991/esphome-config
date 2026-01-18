@@ -27,6 +27,10 @@ ethernet:
   phy_addr: 1
   power_pin: GPIO16
 
+text_sensor:
+  - <<: !include components/text_sensor/version.yaml
+  - <<: !include components/text_sensor/ethernet_info.yaml
+
 binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
 

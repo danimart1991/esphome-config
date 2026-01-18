@@ -20,6 +20,10 @@ uart:
   baud_rate: 9600
   #stop_bits: 2
 
+text_sensor:
+  - <<: !include components/text_sensor/version.yaml
+  - <<: !include components/text_sensor/wifi_info.yaml
+
 sensor:
   - <<: !include components/sensor/internal_temperature.yaml
   - <<: !include components/sensor/wifi_signal.yaml

@@ -1,0 +1,12 @@
+#
+# Ethernet Info Text Sensor
+#
+# The ethernet_info text sensor platform exposes different Ethernet information via text sensors.
+#
+# https://esphome.io/components/text_sensor/ethernet_info/
+#
+
+---
+platform: ethernet_info
+ip_address:
+  name: "${name}_ipaddress"

@@ -19,6 +19,10 @@ esphome:
 <<: !include components/web_server.yaml
 <<: !include components/wifi.yaml
 
+text_sensor:
+  - <<: !include components/text_sensor/version.yaml
+  - <<: !include components/text_sensor/wifi_info.yaml
+
 remote_transmitter:
   pin: GPIO14
   carrier_duty_percent: 33%

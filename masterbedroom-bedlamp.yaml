@@ -12,6 +12,10 @@ substitutions:
 <<: !include components/web_server.yaml
 <<: !include components/wifi.yaml
 
+text_sensor:
+  - <<: !include components/text_sensor/version.yaml
+  - <<: !include components/text_sensor/wifi_info.yaml
+
 binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
 

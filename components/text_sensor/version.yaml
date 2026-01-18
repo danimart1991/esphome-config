@@ -1,0 +1,13 @@
+#
+# Version Text Sensor
+#
+# The version text sensor platform exposes the ESPHome version the firmware was compiled
+# against as a text sensor.
+#
+# https://esphome.io/components/text_sensor/version/
+#
+
+---
+platform: version
+name: "${name}_version"
+hide_timestamp: true
