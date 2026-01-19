@@ -52,6 +52,12 @@ sensor:
 
 binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
+  - platform: template
+    name: "${name}_heating"
+    device_class: heat
+    icon: mdi:water-boiler
+    lambda: |-
+      return id(power_id).state > 100;
   - platform: gpio
     id: button_id
     internal: True
