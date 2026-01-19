@@ -30,7 +30,7 @@ light:
     num_leds: 3
     rgb_order: GRB
     id: light_id
-    name: ${name}_light
+    name: "${name}_light"
 
 status_led:
   pin:

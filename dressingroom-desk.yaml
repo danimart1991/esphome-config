@@ -101,20 +101,20 @@ sensor:
     power_id: power_id
   - platform: dallas_temp
     address: 0x9D3C01D607A18028
-    name: ${name}_temperature
+    name: "${name}_temperature"
     device_class: temperature
     filters:
       - offset: 2.0
   - platform: cse7766
     current:
-      name: ${name}_current
+      name: "${name}_current"
       icon: mdi:current-ac
       device_class: current
       filters:
         - throttle_average: ${powermeter_update_interval}
         - multiply: 0.993793
     voltage:
-      name: ${name}_voltage
+      name: "${name}_voltage"
       icon: mdi:flash-circle
       device_class: voltage
       filters:
@@ -122,22 +122,22 @@ sensor:
         - multiply: 2.410403
     power:
       id: power_id
-      name: ${name}_power
+      name: "${name}_power"
       icon: mdi:flash-outline
       device_class: power
       filters:
         - throttle_average: ${powermeter_update_interval}
         - multiply: 2.438610
     energy:
-      name: ${name}_energy
+      name: "${name}_energy"
       filters:
         - throttle: ${powermeter_update_interval}
     apparent_power:
-      name: ${name}_apparentpower
+      name: "${name}_apparentpower"
       filters:
         - throttle_average: ${powermeter_update_interval}
     power_factor:
-      name: ${name}_powerfactor
+      name: "${name}_powerfactor"
       filters:
         - throttle_average: ${powermeter_update_interval}
   - platform: adc

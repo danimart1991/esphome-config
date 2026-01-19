@@ -40,4 +40,4 @@ switch:
   - platform: gpio
     pin: GPIO12
     id: switch_id
-    name: ${name}_switch
+    name: "${name}_switch"

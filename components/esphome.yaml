@@ -9,5 +9,5 @@
 #
 
 ---
-name: ${name}
-comment: ${comment}
+name: "${name}"
+comment: "${comment}"
