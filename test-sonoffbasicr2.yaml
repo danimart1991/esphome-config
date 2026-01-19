@@ -1,6 +1,6 @@
 substitutions:
-  name: "utility-waterheater"
-  comment: "Utility - Water Heater (Sonoff Basic R2 Dry Contact Mod)"
+  name: "test-sonoffbasicr2"
+  comment: "Test - Sonoff Basic R2 (Sonoff Basic R2 Dry Contact Mod)"
   default_update_interval: 60s
 
 <<: !include boards/esp01_1m.yaml
