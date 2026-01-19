@@ -2,6 +2,7 @@ substitutions:
   name: serverroom-plug
   comment: "Server Room - Plug (Plug AWOW EU3S)"
   default_update_interval: 60s
+  default_restore_mode: RESTORE_DEFAULT_ON
 
 <<: !include boards/esp01_1m.yaml
 <<: !include components/api.yaml
@@ -17,36 +18,6 @@ text_sensor:
   - <<: !include components/text_sensor/version.yaml
   - <<: !include components/text_sensor/wifi_info.yaml
 
-binary_sensor:
-  - <<: !include components/binary_sensor/status.yaml
-  - platform: gpio
-    id: button_id
-    internal: True
-    pin:
-      number: GPIO13
-      mode: INPUT_PULLUP
-      inverted: True
-    on_press:
-      - switch.toggle: switch_id
-
-switch:
-  - platform: gpio
-    id: switch_id
-    name: ${name}_switch
-    restore_mode: RESTORE_DEFAULT_ON
-    pin: GPIO15
-    on_turn_on:
-      - switch.turn_on: led_id
-    on_turn_off:
-      - switch.turn_off: led_id
-  - platform: gpio
-    id: led_id
-    internal: True
-    restore_mode: RESTORE_DEFAULT_ON
-    pin:
-      number: GPIO02
-      inverted: True
-
 sensor:
   - <<: !include components/sensor/wifi_signal.yaml
   - <<: !include components/sensor/total_daily_energy.yaml
@@ -58,23 +29,87 @@ sensor:
     cf_pin: GPIO05
     cf1_pin: GPIO14
     current:
-      name: ${name}_current
+      name: "${name}_current"
       icon: mdi:current-ac
       unit_of_measurement: A
       filters:
         - multiply: 0.722201
     voltage:
-      name: ${name}_voltage
+      name: "${name}_voltage"
       icon: mdi:flash-circle
       unit_of_measurement: V
       filters:
         - multiply: 0.396441
     power:
       id: power_id
-      name: ${name}_power
+      name: "${name}_power"
       icon: mdi:flash-outline
       unit_of_measurement: W
       filters:
         - multiply: 0.151472
     change_mode_every: 1
     update_interval: 10s
+
+binary_sensor:
+  - <<: !include components/binary_sensor/status.yaml
+  - platform: gpio
+    id: button_id
+    pin:
+      number: GPIO13
+      mode: INPUT_PULLUP
+      inverted: True
+    on_press:
+      - switch.toggle: relay_id
+
+switch:
+  - platform: gpio
+    id: relay_id
+    name: "${name}_switch"
+    restore_mode: ${default_restore_mode}
+    pin: GPIO15
+    on_turn_on:
+      - script.execute: led_power_on
+    on_turn_off:
+      - script.execute: led_relay_off
+
+output:
+  - platform: esp8266_pwm
+    id: output_blue_id
+    pin:
+      number: GPIO02
+      inverted: True
+
+light:
+  - platform: monochromatic
+    output: output_blue_id
+    id: light_blue_id
+    restore_mode: ${default_restore_mode}
+
+# Blink the blue light if we aren't connected to WiFi. Could use https://esphome.io/components/status_led.html
+# instead but then we couldn't use the blue light for other things as well.
+# Only if not connected after 30s
+interval:
+  - interval: 2000ms
+    then:
+      - if:
+          condition:
+            for:
+              time: 30s
+              condition:
+                not:
+                  wifi.connected:
+          then:
+            - light.turn_on:
+                id: light_blue_id
+                brightness: 100%
+
+script:
+  - id: led_relay_off
+    then:
+      - light.turn_off:
+          id: light_blue_id
+  - id: led_power_on
+    then:
+      - light.turn_on:
+          id: light_blue_id
+          brightness: 80%
