@@ -1,6 +1,6 @@
 substitutions:
-  name: "kitchen-fridgeplug"
-  comment: "Kitchen - Fridge Plug (Plug Blitzwolf SHP2 V2.3)"
+  name: "utility-waterheater"
+  comment: "Utility - Water Heater (Plug Blitzwolf SHP2 V2.3)"
   default_update_interval: 60s
 
 <<: !include boards/esp8285.yaml
