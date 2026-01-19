@@ -18,7 +18,11 @@ text_sensor:
   - <<: !include components/text_sensor/version.yaml
   - <<: !include components/text_sensor/wifi_info.yaml
 
+button:
+  - <<: !include components/button/restart.yaml
+
 sensor:
+  - <<: !include components/sensor/uptime.yaml
   - <<: !include components/sensor/wifi_signal.yaml
   - <<: !include components/sensor/total_daily_energy.yaml
     power_id: power_id

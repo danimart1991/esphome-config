@@ -13,6 +13,9 @@ substitutions:
 <<: !include components/web_server.yaml
 <<: !include components/wifi.yaml
 
+button:
+  - <<: !include components/button/restart.yaml
+
 text_sensor:
   - <<: !include components/text_sensor/version.yaml
   - <<: !include components/text_sensor/wifi_info.yaml
@@ -22,6 +25,7 @@ i2c:
     scl: GPIO22
 
 sensor:
+  - <<: !include components/sensor/uptime.yaml
   - <<: !include components/sensor/bme280.yaml
   - <<: !include components/sensor/internal_temperature.yaml
   - <<: !include components/sensor/wifi_signal.yaml

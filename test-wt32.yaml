@@ -31,8 +31,12 @@ text_sensor:
   - <<: !include components/text_sensor/version.yaml
   - <<: !include components/text_sensor/ethernet_info.yaml
 
+button:
+  - <<: !include components/button/restart.yaml
+
 binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
 
 sensor:
+  - <<: !include components/sensor/uptime.yaml
   - <<: !include components/sensor/internal_temperature.yaml

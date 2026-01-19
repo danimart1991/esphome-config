@@ -36,10 +36,14 @@ remote_receiver:
 #    - remote_transmitter.transmit_raw:
 #        code: !lambda return x;
 
+button:
+  - <<: !include components/button/restart.yaml
+
 binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
 
 sensor:
+  - <<: !include components/sensor/uptime.yaml
   - <<: !include components/sensor/wifi_signal.yaml
 
 switch:

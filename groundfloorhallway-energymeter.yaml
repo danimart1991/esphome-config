@@ -25,6 +25,7 @@ text_sensor:
   - <<: !include components/text_sensor/wifi_info.yaml
 
 sensor:
+  - <<: !include components/sensor/uptime.yaml
   - <<: !include components/sensor/internal_temperature.yaml
   - <<: !include components/sensor/wifi_signal.yaml
   - <<: !include components/sensor/total_daily_energy.yaml
@@ -50,6 +51,7 @@ binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
 
 button:
+  - <<: !include components/button/restart.yaml
   - platform: template
     name: "${name}_resetenergy"
     icon: "mdi:restart"

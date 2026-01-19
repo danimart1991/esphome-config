@@ -16,6 +16,9 @@ text_sensor:
   - <<: !include components/text_sensor/version.yaml
   - <<: !include components/text_sensor/wifi_info.yaml
 
+button:
+  - <<: !include components/button/restart.yaml
+
 binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
   - platform: gpio
@@ -29,6 +32,7 @@ binary_sensor:
       - switch.toggle: switch_id
 
 sensor:
+  - <<: !include components/sensor/uptime.yaml
   - <<: !include components/sensor/wifi_signal.yaml
 
 status_led:

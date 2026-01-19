@@ -27,6 +27,9 @@ status_led:
     number: GPIO02
     inverted: True
 
+button:
+  - <<: !include components/button/restart.yaml
+
 binary_sensor:
   - <<: !include components/binary_sensor/status.yaml
   - platform: gpio
@@ -96,6 +99,7 @@ one_wire:
     pin: GPIO04
 
 sensor:
+  - <<: !include components/sensor/uptime.yaml
   - <<: !include components/sensor/wifi_signal.yaml
   - <<: !include components/sensor/total_daily_energy.yaml
     power_id: power_id
