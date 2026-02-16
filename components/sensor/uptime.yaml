@@ -13,4 +13,4 @@ name: "${name}_uptime"
 type: seconds
 filters:
   - lambda: return x / 60.0;
-unit_of_measurement: minutes
+unit_of_measurement: min
